@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-01-28T03:32:14.685Z</updated>
+  <updated>2021-02-03T12:44:28.333Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSObject-Alloc实现</title>
+    <link href="http://example.com/2021/02/03/NSObject-Alloc%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://example.com/2021/02/03/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</id>
+    <published>2021-02-03T12:43:40.000Z</published>
+    <updated>2021-02-03T12:44:28.333Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;有两种alloc实现&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GNUstep(Cocoa互换框架 )&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明,</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
