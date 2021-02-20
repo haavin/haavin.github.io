@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    归档: 2021 |
+    视频编解码相关 |
     
     haavin</title>
   
@@ -31,93 +31,86 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article class="articles">
+  <article id="post-视频编解码相关" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
     
-    <h1 class="page-type-title">2021</h1>
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2021" class="archive-year">2021</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" class="archive-article-date">
-  <time datetime="2021-02-20T10:28:14.000Z" itemprop="datePublished">02/20</time>
-</a>
+    <header class="article-header">
       
 
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/">视频编解码相关</a>
-</h2>
+<h1 class="article-title" itemprop="name">
+  视频编解码相关
+</h1>
 
 
 
     </header>
     
+
     
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/01/28/hello-world/" class="archive-article-date">
-  <time datetime="2021-01-28T03:32:14.685Z" itemprop="datePublished">01/28</time>
+    <div class="article-meta">
+      <a href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2021-02-20T10:28:14.000Z" itemprop="datePublished">2021-02-20</time>
 </a>
-      
-
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2021/01/28/hello-world/">Hello World</a>
-</h2>
-
-
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  <time datetime="2021-01-25T12:45:45.000Z" itemprop="datePublished">01/25</time>
-</a>
-      
-
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/">NSObject alloc实现</a>
-</h2>
-
-
-
-    </header>
-    
-    
-  </div>
-</article>
-      
       
     </div>
+    
+
+    
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <ol>
+<li><p>PTS/DTS<br> 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp<br> 在FFMPEG中有AVPacket和AVFrame两个类</p>
+<ul>
+<li><p>AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</p>
+</li>
+<li><p>AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</p>
+<p>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</p>
+</li>
+</ul>
+</li>
+<li><p>音频采样率</p>
+<p> 模拟到数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" data-id="ckldm8ecp0003ozpx865t6dbg" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
   </div>
+
   
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/01/28/hello-world/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Hello World</div>
+  </a>
+  
+</nav>
+
   
 
   
+  
+  
+  
+
+</article>
 </section>
     <footer class="footer">
   <div class="outer">
@@ -125,6 +118,8 @@
       <ul class="list-inline">
   
   <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
   
 </ul>
     </div>
@@ -219,6 +214,23 @@
 
 
 
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
 
 
 

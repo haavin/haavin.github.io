@@ -63,6 +63,70 @@
     <h1 class="page-type-title"></h1>
     
     
+    <article id="post-视频编解码相关" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/">视频编解码相关</a>
+</h2>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2021-02-20T10:28:14.000Z" itemprop="datePublished">2021-02-20</time>
+</a>
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <ol>
+<li><p>PTS/DTS<br> 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp<br> 在FFMPEG中有AVPacket和AVFrame两个类</p>
+<ul>
+<li><p>AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</p>
+</li>
+<li><p>AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</p>
+<p>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</p>
+</li>
+</ul>
+</li>
+<li><p>音频采样率</p>
+<p> 模拟到数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" data-id="ckldm8ecp0003ozpx865t6dbg" class="article-share-link">
+        分享
+      </a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+    
     <article id="post-hello-world" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -108,7 +172,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/28/hello-world/" data-id="ckkpfzpf30001swpxbhzx5saa" class="article-share-link">
+      <a data-url="http://example.com/2021/01/28/hello-world/" data-id="ckldm8eck0001ozpx0unbahdq" class="article-share-link">
         分享
       </a>
       
@@ -174,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" data-id="ckkpfzpez0000swpx2m1a0qbk" class="article-share-link">
+      <a data-url="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" data-id="ckldm8ece0000ozpx1pp8f3oc" class="article-share-link">
         分享
       </a>
       
