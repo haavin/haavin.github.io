@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-02-20T11:05:16.138Z</updated>
+  <updated>2021-02-22T09:06:24.097Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>markdown cheet sheet</title>
+    <link href="http://example.com/2021/02/22/markdown-cheet-sheet/"/>
+    <id>http://example.com/2021/02/22/markdown-cheet-sheet/</id>
+    <published>2021-02-22T09:01:19.000Z</published>
+    <updated>2021-02-22T09:06:24.097Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Header-2&quot;&gt;&lt;a href=&quot;#Header-2&quot; class=&quot;headerlink&quot; title=&quot;Header 2&quot;&gt;&lt;/a&gt;Header 2&lt;/h2&gt;&lt;h3 id=&quot;Header-3&quot;&gt;&lt;a href=&quot;#Header-3&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>王阳明心学</title>
+    <link href="http://example.com/2021/02/22/%E7%8E%8B%E9%98%B3%E6%98%8E%E5%BF%83%E5%AD%A6/"/>
+    <id>http://example.com/2021/02/22/%E7%8E%8B%E9%98%B3%E6%98%8E%E5%BF%83%E5%AD%A6/</id>
+    <published>2021-02-22T02:43:54.000Z</published>
+    <updated>2021-02-22T09:48:24.925Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”. </summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>视频编解码相关</title>
