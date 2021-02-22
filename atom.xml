@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-02-22T11:15:55.609Z</updated>
+  <updated>2021-02-22T11:19:28.722Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2021/02/22/ishot-md/"/>
     <id>http://example.com/2021/02/22/ishot-md/</id>
     <published>2021-02-22T11:01:08.000Z</published>
-    <updated>2021-02-22T11:15:55.609Z</updated>
+    <updated>2021-02-22T11:19:28.722Z</updated>
     
     
       
@@ -29,9 +29,9 @@
         
         
     <summary type="html">&lt;p&gt;基本操作:&lt;/p&gt;
-&lt;p&gt;option+ A&lt;br&gt;option+ z&lt;/p&gt;
-&lt;p&gt;1-9功能,支持标注标 模糊等功能&lt;br&gt;    在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细&lt;/p&gt;
-&lt;p&gt;空格 保存文件 到默认路径&lt;br&gt;回车</summary>
+&lt;pre&gt;&lt;code&gt;1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or</summary>
         
       
     
@@ -45,7 +45,7 @@
     <link href="http://example.com/2021/02/22/markdown-cheet-sheet/"/>
     <id>http://example.com/2021/02/22/markdown-cheet-sheet/</id>
     <published>2021-02-22T09:01:19.000Z</published>
-    <updated>2021-02-22T09:06:24.097Z</updated>
+    <updated>2021-02-22T11:24:10.583Z</updated>
     
     
       
@@ -58,6 +58,8 @@
     
     
     
+    
+    <category term="hide" scheme="http://example.com/tags/hide/"/>
     
   </entry>
   
@@ -109,7 +111,7 @@
     <link href="http://example.com/2021/01/28/hello-world/"/>
     <id>http://example.com/2021/01/28/hello-world/</id>
     <published>2021-01-28T03:32:14.685Z</published>
-    <updated>2021-01-28T03:32:14.685Z</updated>
+    <updated>2021-02-22T11:23:57.992Z</updated>
     
     
       
@@ -122,6 +124,8 @@
     
     
     
+    
+    <category term="hide" scheme="http://example.com/tags/hide/"/>
     
   </entry>
   

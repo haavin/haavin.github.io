@@ -4,9 +4,10 @@
     <title>推荐好用的截图软件iShot</title>
     <url>/2021/02/22/ishot-md/</url>
     <content><![CDATA[<p>基本操作:</p>
-<p>option+ A<br>option+ z</p>
-<p>1-9功能,支持标注标 模糊等功能<br>    在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细</p>
-<p>空格 保存文件 到默认路径<br>回车 到剪贴板</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
 ]]></content>
   </entry>
   <entry>
@@ -86,6 +87,9 @@
 <li>Definitions can include multiple paragraphs too</li>
 </ul>
 ]]></content>
+      <tags>
+        <tag>hide</tag>
+      </tags>
   </entry>
   <entry>
     <title>王阳明心学</title>
@@ -125,6 +129,9 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+      <tags>
+        <tag>hide</tag>
+      </tags>
   </entry>
   <entry>
     <title>NSObject alloc实现</title>
