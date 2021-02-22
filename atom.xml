@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-02-22T09:06:24.097Z</updated>
+  <updated>2021-02-22T11:15:55.609Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>推荐好用的截图软件iShot</title>
+    <link href="http://example.com/2021/02/22/ishot-md/"/>
+    <id>http://example.com/2021/02/22/ishot-md/</id>
+    <published>2021-02-22T11:01:08.000Z</published>
+    <updated>2021-02-22T11:15:55.609Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;基本操作:&lt;/p&gt;
+&lt;p&gt;option+ A&lt;br&gt;option+ z&lt;/p&gt;
+&lt;p&gt;1-9功能,支持标注标 模糊等功能&lt;br&gt;    在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细&lt;/p&gt;
+&lt;p&gt;空格 保存文件 到默认路径&lt;br&gt;回车</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>markdown cheet sheet</title>
@@ -39,17 +63,17 @@
   
   <entry>
     <title>王阳明心学</title>
-    <link href="http://example.com/2021/02/22/%E7%8E%8B%E9%98%B3%E6%98%8E%E5%BF%83%E5%AD%A6/"/>
-    <id>http://example.com/2021/02/22/%E7%8E%8B%E9%98%B3%E6%98%8E%E5%BF%83%E5%AD%A6/</id>
+    <link href="http://example.com/2021/02/22/wang_yang_ming/"/>
+    <id>http://example.com/2021/02/22/wang_yang_ming/</id>
     <published>2021-02-22T02:43:54.000Z</published>
-    <updated>2021-02-22T09:48:24.925Z</updated>
+    <updated>2021-02-22T11:04:38.382Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”. </summary>
+    <summary type="html">&lt;p&gt;王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第.</summary>
         
       
     

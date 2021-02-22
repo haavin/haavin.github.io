@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>推荐好用的截图软件iShot</title>
+    <url>/2021/02/22/ishot-md/</url>
+    <content><![CDATA[<p>基本操作:</p>
+<p>option+ A<br>option+ z</p>
+<p>1-9功能,支持标注标 模糊等功能<br>    在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细</p>
+<p>空格 保存文件 到默认路径<br>回车 到剪贴板</p>
+]]></content>
+  </entry>
+  <entry>
     <title>markdown cheet sheet</title>
     <url>/2021/02/22/markdown-cheet-sheet/</url>
     <content><![CDATA[<h2 id="Header-2"><a href="#Header-2" class="headerlink" title="Header 2"></a>Header 2</h2><h3 id="Header-3"><a href="#Header-3" class="headerlink" title="Header 3"></a>Header 3</h3><h4 id="Header-4"><a href="#Header-4" class="headerlink" title="Header 4"></a>Header 4</h4><h5 id="Header-5"><a href="#Header-5" class="headerlink" title="Header 5"></a>Header 5</h5><p><a href="#id-goes-here">Link back to H2</a></p>
@@ -80,8 +89,8 @@
   </entry>
   <entry>
     <title>王阳明心学</title>
-    <url>/2021/02/22/%E7%8E%8B%E9%98%B3%E6%98%8E%E5%BF%83%E5%AD%A6/</url>
-    <content><![CDATA[<p>王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”.  </p>
+    <url>/2021/02/22/wang_yang_ming/</url>
+    <content><![CDATA[<p>王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”.</p>
 ]]></content>
   </entry>
   <entry>
