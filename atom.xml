@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-02-22T11:35:35.190Z</updated>
+  <updated>2021-02-23T10:55:30.078Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iTerm2终端光标操作</title>
+    <link href="http://example.com/2021/02/23/iterm2-cursor/"/>
+    <id>http://example.com/2021/02/23/iterm2-cursor/</id>
+    <published>2021-02-23T10:52:12.000Z</published>
+    <updated>2021-02-23T10:55:30.078Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;修改 iterm2-&amp;gt;Preferences-&amp;gt;Profile.Default.Preset为&lt;code&gt;Natural Text Editing&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;删除&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ctrl+u</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>推荐好用的截图软件iShot</title>

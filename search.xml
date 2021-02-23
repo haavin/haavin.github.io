@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>iTerm2终端光标操作</title>
+    <url>/2021/02/23/iterm2-cursor/</url>
+    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>推荐好用的截图软件iShot</title>
     <url>/2021/02/22/ishot-md/</url>
     <content><![CDATA[<p>基本操作:</p>
