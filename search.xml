@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>IOS数据加载层架构设计</title>
     <url>/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p>之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
@@ -48,42 +43,13 @@
 <p>对于使用的业务方,面向的是接口,关注的是自己业务API特定的参数, 而不用关注上述的处理细节.<br>附架构图设计如下:</p>
 </li>
 </ul>
-<p><img src="./IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="架构图"></p>
+<p><img src="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="架构图"></p>
 ]]></content>
   </entry>
   <entry>
-    <title>NSObject alloc实现</title>
-    <url>/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>有两种alloc实现</p>
-<ol>
-<li><p>GNUstep(Cocoa互换框架 )</p>
-<p> NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明, 现在的运行时系统内存管理已极具效率,使用NSZone反而效率低下源码复杂.</p>
-<p> alloc简化版,引用计数信息写入对象内存头部</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>&#123;</span></span><br><span class="line">    NSUinteger retained;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+(id)alloc&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="keyword">sizeof</span>(stuct obj_layout)+对象大小</span><br><span class="line">    struct obj_layout *p = (struct obj_layout*) <span class="built_in">calloc</span>(<span class="number">1</span>,size);</span><br><span class="line">    <span class="keyword">return</span>(id)(p+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)release&#123;</span><br><span class="line">    <span class="keyword">if</span>(decrementeExtraRefCountWasZero(self))</span><br><span class="line">    [self dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>*<span class="title">p</span> =</span> &amp; ((struct obj_layout *)self)[<span class="number">-1</span>];</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p> Q:当retained变量超出最大值时会发生什么?<br> A:retain方法会抛出异常</p>
-</li>
-<li><p>Apple实现</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">CFSpinLock_t lock;</span><br><span class="line">CFBasicHashRef table;</span><br><span class="line"><span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line"></span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">            __CFSpinLock(lock);</span><br><span class="line">            CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">            __CFSpinUnlock(lock);</span><br><span class="line">            <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>  __CFDoExternRefOperation 按照retainCount/retain/release 调用不同的函数.<br>  alloc通过多个散列表来管理引用计数,对每个引用计数表的访问都需要配合spinlock.<br> <code>CFBasicHashRef table = __NSRetainCounters[idx].table;</code> 从该行代码看,APPLE是通过多个散列表来管理引用计数,每个NSRetainCounters结构体里有spinlock和table,执行引用计数操作时是线程安全的.</p>
-</li>
-<li><p>两种实现对比</p>
-<p> GNUstep实现简单高效,代码少, 内存块需考虑头部(指针地址偏移);<br> 苹果的实现较为复杂通过引用计数表查到内存块.<br> 苹果实现好处是:方便调试,即使对象内存块损坏, 只要引用计数表没有被破话, 就能够确认内存块位置; <strong><em>在检测内存泄漏时,有助于检测各对象的持有者是否存在.</em></strong></p>
-</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>IOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>推荐好用的截图软件iShot</title>
-    <url>/2021/02/22/ishot-md/</url>
-    <content><![CDATA[<p>基本操作:</p>
-<pre><code>1. option+ A 选取截图区域
-2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
-3. 空格(保存文件 到默认路径) or 回车到剪贴板
-</code></pre>
-]]></content>
+    <title></title>
+    <url>/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>iTerm2终端光标操作</title>
@@ -101,6 +67,16 @@
 </blockquote>
 </li>
 </ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>推荐好用的截图软件iShot</title>
+    <url>/2021/02/22/ishot-md/</url>
+    <content><![CDATA[<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
 ]]></content>
   </entry>
   <entry>
@@ -127,5 +103,29 @@
 </li>
 </ol>
 ]]></content>
+  </entry>
+  <entry>
+    <title>NSObject alloc实现</title>
+    <url>/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>有两种alloc实现</p>
+<ol>
+<li><p>GNUstep(Cocoa互换框架 )</p>
+<p> NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明, 现在的运行时系统内存管理已极具效率,使用NSZone反而效率低下源码复杂.</p>
+<p> alloc简化版,引用计数信息写入对象内存头部</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>&#123;</span></span><br><span class="line">    NSUinteger retained;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+(id)alloc&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="keyword">sizeof</span>(stuct obj_layout)+对象大小</span><br><span class="line">    struct obj_layout *p = (struct obj_layout*) <span class="built_in">calloc</span>(<span class="number">1</span>,size);</span><br><span class="line">    <span class="keyword">return</span>(id)(p+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)release&#123;</span><br><span class="line">    <span class="keyword">if</span>(decrementeExtraRefCountWasZero(self))</span><br><span class="line">    [self dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>*<span class="title">p</span> =</span> &amp; ((struct obj_layout *)self)[<span class="number">-1</span>];</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> Q:当retained变量超出最大值时会发生什么?<br> A:retain方法会抛出异常</p>
+</li>
+<li><p>Apple实现</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">CFSpinLock_t lock;</span><br><span class="line">CFBasicHashRef table;</span><br><span class="line"><span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line"></span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">            __CFSpinLock(lock);</span><br><span class="line">            CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">            __CFSpinUnlock(lock);</span><br><span class="line">            <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  __CFDoExternRefOperation 按照retainCount/retain/release 调用不同的函数.<br>  alloc通过多个散列表来管理引用计数,对每个引用计数表的访问都需要配合spinlock.<br> <code>CFBasicHashRef table = __NSRetainCounters[idx].table;</code> 从该行代码看,APPLE是通过多个散列表来管理引用计数,每个NSRetainCounters结构体里有spinlock和table,执行引用计数操作时是线程安全的.</p>
+</li>
+<li><p>两种实现对比</p>
+<p> GNUstep实现简单高效,代码少, 内存块需考虑头部(指针地址偏移);<br> 苹果的实现较为复杂通过引用计数表查到内存块.<br> 苹果实现好处是:方便调试,即使对象内存块损坏, 只要引用计数表没有被破话, 就能够确认内存块位置; <strong><em>在检测内存泄漏时,有助于检测各对象的持有者是否存在.</em></strong></p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>IOS</tag>
+      </tags>
   </entry>
 </search>
