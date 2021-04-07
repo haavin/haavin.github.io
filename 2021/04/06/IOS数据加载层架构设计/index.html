@@ -8,9 +8,9 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Hello World |
+    IOS数据加载层架构设计 |
     
-    haavin</title><meta name="robots" content="noindex">
+    haavin</title>
   
   <link rel="shortcut icon" href="/favicon.ico">
   
@@ -31,7 +31,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-hello-world" class="article article-type-post" itemscope
+  <article id="post-IOS数据加载层架构设计" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  Hello World
+  IOS数据加载层架构设计
 </h1>
 
 
@@ -50,8 +50,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/01/28/hello-world/" class="article-date">
-  <time datetime="2021-01-28T03:32:14.685Z" itemprop="datePublished">2021-01-28</time>
+      <a href="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="article-date">
+  <time datetime="2021-04-06T10:45:09.000Z" itemprop="datePublished">2021-04-06</time>
 </a>
       
     </div>
@@ -59,28 +59,58 @@
 
     
     
-<div class="tocbot"></div>
-
     
 
     <div class="article-entry" itemprop="articleBody">
       
       
       
-      <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<!-- flag of hidden posts -->
+      <p>之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
+<ul>
+<li><p>网络请求的包装(AF)</p>
+</li>
+<li><p>数据解析(DataParser),需要对空值及错误处理</p>
+</li>
+<li><p>重试队列,对网络请求超时处理</p>
+</li>
+<li><p>对请求进行统一的加工</p>
+<ul>
+<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
+<li>根据请求参数进行请求签名</li>
+<li>日志<ul>
+<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
+<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>缓存的读取及写入</p>
+<ul>
+<li>内存+硬盘 缓存方案可由调用方指定</li>
+<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
+<li>代码简单</li>
+<li>自带线程安全</li>
+<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
+<li>内存警告时能自动清理内存数据</li>
+</ul>
+</li>
+<li>持久化写入<ul>
+<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
+<li>写入temp目录,由系统自动清理</li>
+<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
+</ul>
+</li>
+</ul>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.</p>
+<p>对于使用的业务方,面向的是接口,关注的是自己业务API特定的参数, 而不用关注上述的处理细节.<br>附架构图设计如下:</p>
+</li>
+</ul>
+<p><img src="./img/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png" alt="架构图"></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/28/hello-world/" data-id="ckn796fnh00068cpxduqgay3a" class="article-share-link">
+      <a data-url="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" data-id="ckn796fnb00018cpxecwvhvvk" class="article-share-link">
         分享
       </a>
       
@@ -90,6 +120,16 @@
 
   
   
+<nav class="article-nav">
+  
+  
+  <a href="/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title"></div>
+  </a>
+  
+</nav>
+
   
 
   

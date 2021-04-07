@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-02-23T10:55:30.078Z</updated>
+  <updated>2021-04-07T09:31:43.926Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IOS数据加载层架构设计</title>
+    <link href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</id>
+    <published>2021-04-06T10:45:09.000Z</published>
+    <updated>2021-04-07T09:31:43.926Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;网络请求的包装(AF)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据解析(DataParser),需要对空值及错误处理&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重试队列,对网络请求超时处</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/"/>
+    <id>http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</id>
+    <published>2021-03-08T06:31:33.106Z</published>
+    <updated>2021-03-08T06:31:33.106Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>iTerm2终端光标操作</title>
