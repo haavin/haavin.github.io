@@ -1,271 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    IOS数据加载层架构设计 |
-    
-    haavin</title>
-  
-  <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
-<script src="/js/pace.min.js"></script>
-
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="haavin" type="application/atom+xml">
-</head>
-
-<body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-IOS数据加载层架构设计" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-
-<h1 class="article-title" itemprop="name">
-  IOS数据加载层架构设计
-</h1>
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-    </header>
-    
+{% block page_class %}page-post-detail{% endblock %}
 
-    
-    <div class="article-meta">
-      <a href="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="article-date">
-  <time datetime="2021-04-06T10:45:09.000Z" itemprop="datePublished">2021-04-06</time>
-</a>
-      
+
+{% block content %}
+
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
-    
-
-    
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-      <p>之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
-<ul>
-<li><p>网络请求的包装(AF)</p>
-</li>
-<li><p>数据解析(DataParser),需要对空值及错误处理</p>
-</li>
-<li><p>重试队列,对网络请求超时处理</p>
-</li>
-<li><p>对请求进行统一的加工</p>
-<ul>
-<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
-<li>根据请求参数进行请求签名</li>
-</ul>
-</li>
-<li><p>日志</p>
-<ul>
-<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
-<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
-</ul>
-</li>
-<li><p>缓存的读取及写入</p>
-<ul>
-<li>内存+硬盘 缓存方案可由调用方指定</li>
-<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
-<li>代码简单</li>
-<li>自带线程安全</li>
-<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
-<li>内存警告时能自动清理内存数据</li>
-</ul>
-</li>
-<li>持久化写入<ul>
-<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
-<li>写入temp目录,由系统自动清理</li>
-<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
-</ul>
-</li>
-</ul>
-<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>附架构图设计如下:</p>
-<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" data-id="ckn8ozgmi00018dpx8fdw736g" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
   </div>
 
-  
-  
-<nav class="article-nav">
-  
-  
-  <a href="/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/" class="article-nav-link">
-    <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title"></div>
-  </a>
-  
-</nav>
+{% endblock %}
 
-  
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-  
-  
-  
-  
-
-</article>
-</section>
-    <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>haavin &copy; 2021</li>
-      
-        <li>京ICP备17054916号-2</li>
-      
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="haavin"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/gallery">Gallery</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/about">About</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/copybtn.js"></script>
-
-
-
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-  });
-</script>
-
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
