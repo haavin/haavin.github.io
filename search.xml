@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>IOS数据加载层架构设计</title>
     <url>/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
     <content><![CDATA[<p>之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
@@ -48,7 +43,65 @@
 <p>对于使用的业务方,面向的是接口,关注的是自己业务API特定的参数, 而不用关注上述的处理细节.<br>附架构图设计如下:</p>
 </li>
 </ul>
-<p><img src="./1.png" alt="架构图"></p>
+<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>iTerm2终端光标操作</title>
+    <url>/2021/02/23/iterm2-cursor/</url>
+    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>推荐好用的截图软件iShot</title>
+    <url>/2021/02/22/ishot-md/</url>
+    <content><![CDATA[<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>王阳明心学</title>
+    <url>/2021/02/22/wang_yang_ming/</url>
+    <content><![CDATA[<p>王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”.</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>视频编解码相关</title>
+    <url>/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<ol>
+<li><p>PTS/DTS<br> 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp<br> 在FFMPEG中有AVPacket和AVFrame两个类</p>
+<ul>
+<li><p>AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</p>
+</li>
+<li><p>AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</p>
+<p>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</p>
+</li>
+</ul>
+</li>
+<li><p>音频采样率</p>
+<p> 模拟到数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+</ol>
 ]]></content>
   </entry>
   <entry>
@@ -76,58 +129,5 @@
       <tags>
         <tag>IOS</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>推荐好用的截图软件iShot</title>
-    <url>/2021/02/22/ishot-md/</url>
-    <content><![CDATA[<p>基本操作:</p>
-<pre><code>1. option+ A 选取截图区域
-2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
-3. 空格(保存文件 到默认路径) or 回车到剪贴板
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>iTerm2终端光标操作</title>
-    <url>/2021/02/23/iterm2-cursor/</url>
-    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
-<ol>
-<li><p>删除</p>
-<blockquote>
-<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
-</blockquote>
-</li>
-<li><p>光标移动</p>
-<blockquote>
-<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>王阳明心学</title>
-    <url>/2021/02/22/wang_yang_ming/</url>
-    <content><![CDATA[<p>王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”.</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>视频编解码相关</title>
-    <url>/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<ol>
-<li><p>PTS/DTS<br> 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp<br> 在FFMPEG中有AVPacket和AVFrame两个类</p>
-<ul>
-<li><p>AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</p>
-</li>
-<li><p>AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</p>
-<p>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</p>
-</li>
-</ul>
-</li>
-<li><p>音频采样率</p>
-<p> 模拟到数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
-</li>
-</ol>
-]]></content>
   </entry>
 </search>
