@@ -1,23 +1,823 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+  <meta property="og:type" content="website">
+<meta property="og:title" content="haavin">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="haavin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="L KK">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>haavin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="haavin" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">haavin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">em...</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">IOS数据加载层架构设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 18:45:09" itemprop="dateCreated datePublished" datetime="2021-04-06T18:45:09+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 17:42:35" itemprop="dateModified" datetime="2021-04-08T17:42:35+08:00">2021-04-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
+<ul>
+<li><p>网络请求的包装(AF)</p>
+</li>
+<li><p>数据解析(DataParser),需要对空值及错误处理</p>
+</li>
+<li><p>重试队列,对网络请求超时处理</p>
+</li>
+<li><p>对请求进行统一的加工</p>
+<ul>
+<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
+<li>根据请求参数进行请求签名</li>
+</ul>
+</li>
+<li><p>日志</p>
+<ul>
+<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
+<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
+</ul>
+</li>
+<li><p>缓存的读取及写入</p>
+<ul>
+<li>内存+硬盘 缓存方案可由调用方指定</li>
+<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
+<li>代码简单</li>
+<li>自带线程安全</li>
+<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
+<li>内存警告时能自动清理内存数据</li>
+</ul>
+</li>
+<li>持久化写入<ul>
+<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
+<li>写入temp目录,由系统自动清理</li>
+<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
+</ul>
+</li>
+</ul>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>附架构图设计如下:</p>
+<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-08 14:31:33" itemprop="dateCreated datePublished" datetime="2021-03-08T14:31:33+08:00">2021-03-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/23/iterm2-cursor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/23/iterm2-cursor/" class="post-title-link" itemprop="url">iTerm2终端光标操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-23 18:52:12 / 修改时间：18:55:30" itemprop="dateCreated datePublished" datetime="2021-02-23T18:52:12+08:00">2021-02-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/22/ishot-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/22/ishot-md/" class="post-title-link" itemprop="url">推荐好用的截图软件iShot</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-22 19:01:08 / 修改时间：19:35:35" itemprop="dateCreated datePublished" datetime="2021-02-22T19:01:08+08:00">2021-02-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/22/wang_yang_ming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/22/wang_yang_ming/" class="post-title-link" itemprop="url">王阳明心学</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-22 10:43:54 / 修改时间：19:04:38" itemprop="dateCreated datePublished" datetime="2021-02-22T10:43:54+08:00">2021-02-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>王守仁,号阳明子,人们称他为王阳明.1472年出生在浙江余姚的一个书香门第. 出生时取名王云,到4岁不会说话.后得一和尚指点,其父改名为守仁.守仁,取自《论语》,“知及之,仁不能守之,虽得之,必失之.知及之,仁能守之”.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">视频编解码相关</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 18:28:14" itemprop="dateCreated datePublished" datetime="2021-02-20T18:28:14+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-22 19:35:31" itemprop="dateModified" datetime="2021-02-22T19:35:31+08:00">2021-02-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>PTS/DTS<br> 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp<br> 在FFMPEG中有AVPacket和AVFrame两个类</p>
+<ul>
+<li><p>AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</p>
+</li>
+<li><p>AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</p>
+<p>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</p>
+</li>
+</ul>
+</li>
+<li><p>音频采样率</p>
+<p> 模拟到数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">NSObject alloc实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-25 20:45:45" itemprop="dateCreated datePublished" datetime="2021-01-25T20:45:45+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-20 18:30:42" itemprop="dateModified" datetime="2021-02-20T18:30:42+08:00">2021-02-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>有两种alloc实现</p>
+<ol>
+<li><p>GNUstep(Cocoa互换框架 )</p>
+<p> NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明, 现在的运行时系统内存管理已极具效率,使用NSZone反而效率低下源码复杂.</p>
+<p> alloc简化版,引用计数信息写入对象内存头部</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>&#123;</span></span><br><span class="line">    NSUinteger retained;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+(id)alloc&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="keyword">sizeof</span>(stuct obj_layout)+对象大小</span><br><span class="line">    struct obj_layout *p = (struct obj_layout*) <span class="built_in">calloc</span>(<span class="number">1</span>,size);</span><br><span class="line">    <span class="keyword">return</span>(id)(p+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)release&#123;</span><br><span class="line">    <span class="keyword">if</span>(decrementeExtraRefCountWasZero(self))</span><br><span class="line">    [self dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>*<span class="title">p</span> =</span> &amp; ((struct obj_layout *)self)[<span class="number">-1</span>];</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> Q:当retained变量超出最大值时会发生什么?<br> A:retain方法会抛出异常</p>
+</li>
+<li><p>Apple实现</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">CFSpinLock_t lock;</span><br><span class="line">CFBasicHashRef table;</span><br><span class="line"><span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line"></span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">            __CFSpinLock(lock);</span><br><span class="line">            CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">            __CFSpinUnlock(lock);</span><br><span class="line">            <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  __CFDoExternRefOperation 按照retainCount/retain/release 调用不同的函数.<br>  alloc通过多个散列表来管理引用计数,对每个引用计数表的访问都需要配合spinlock.<br> <code>CFBasicHashRef table = __NSRetainCounters[idx].table;</code> 从该行代码看,APPLE是通过多个散列表来管理引用计数,每个NSRetainCounters结构体里有spinlock和table,执行引用计数操作时是线程安全的.</p>
+</li>
+<li><p>两种实现对比</p>
+<p> GNUstep实现简单高效,代码少, 内存块需考虑头部(指针地址偏移);<br> 苹果的实现较为复杂通过引用计数表查到内存块.<br> 苹果实现好处是:方便调试,即使对象内存块损坏, 只要引用计数表没有被破话, 就能够确认内存块位置; <strong><em>在检测内存泄漏时,有助于检测各对象的持有者是否存在.</em></strong></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">L KK</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">L KK</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
