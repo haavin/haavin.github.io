@@ -39,10 +39,12 @@
 </ul>
 </li>
 </ul>
-<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.</p>
-<p>对于使用的业务方,面向的是接口,关注的是自己业务API特定的参数, 而不用关注上述的处理细节.<br>附架构图设计如下:</p>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
+<p>附架构图设计如下:</p>
 <p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
 ]]></content>
   </entry>

@@ -131,16 +131,18 @@
 </ul>
 </li>
 </ul>
-<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.</p>
-<p>对于使用的业务方,面向的是接口,关注的是自己业务API特定的参数, 而不用关注上述的处理细节.<br>附架构图设计如下:</p>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
+<p>附架构图设计如下:</p>
 <p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" data-id="ckn8ol47n0002nspx5tji60w1" class="article-share-link">
+      <a data-url="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" data-id="ckn8ooyjm0002x1px0wm7e2rz" class="article-share-link">
         分享
       </a>
       
@@ -179,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/" data-id="ckn8ol47g0000nspx2bav8gzz" class="article-share-link">
+      <a data-url="http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/" data-id="ckn8ooyja0000x1pxho8gdbr3" class="article-share-link">
         分享
       </a>
       
@@ -242,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/23/iterm2-cursor/" data-id="ckn8ol47p0004nspx87uy7bpw" class="article-share-link">
+      <a data-url="http://example.com/2021/02/23/iterm2-cursor/" data-id="ckn8ooyjr0008x1pxcuajbr30" class="article-share-link">
         分享
       </a>
       
@@ -297,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/22/ishot-md/" data-id="ckn8ol47q0005nspxehyr4awi" class="article-share-link">
+      <a data-url="http://example.com/2021/02/22/ishot-md/" data-id="ckn8ooyjq0005x1pxdsgz5v5k" class="article-share-link">
         分享
       </a>
       
@@ -348,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/22/wang_yang_ming/" data-id="ckn8ol47v0009nspx6qhw5tvx" class="article-share-link">
+      <a data-url="http://example.com/2021/02/22/wang_yang_ming/" data-id="ckn8ooyjs0009x1pxabmmfdf6" class="article-share-link">
         分享
       </a>
       
@@ -412,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" data-id="ckn8ol47x000anspx6y45fl5v" class="article-share-link">
+      <a data-url="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/" data-id="ckn8ooyjt000ax1px3x3v0nhw" class="article-share-link">
         分享
       </a>
       
@@ -480,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" data-id="ckn8ol47l0001nspxauywag95" class="article-share-link">
+      <a data-url="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/" data-id="ckn8ooyjl0001x1px7y606nq8" class="article-share-link">
         分享
       </a>
       
