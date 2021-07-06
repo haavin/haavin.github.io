@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-08T09:42:35.076Z</updated>
+  <updated>2021-05-12T11:41:04.862Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,73 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="http://example.com/2021/05/12/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/"/>
+    <id>http://example.com/2021/05/12/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</id>
+    <published>2021-05-12T11:41:04.862Z</published>
+    <updated>2021-05-12T11:41:04.862Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>AVFoundation播放器</title>
+    <link href="http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</id>
+    <published>2021-04-19T12:56:23.000Z</published>
+    <updated>2021-05-12T11:41:04.857Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HLS简谈</title>
+    <link href="http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/"/>
+    <id>http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/</id>
+    <published>2021-04-19T12:56:09.000Z</published>
+    <updated>2021-05-12T11:41:04.857Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;HLS(HTTP Live Streaming), 是苹果公司提出的基于HTTP的流媒体传输协议.客户端可以根据自身的带宽情况及性能限制,播放不同码流视频.&lt;/p&gt;
+&lt;p&gt;封装容器:TS,一般采用h264编码&lt;/p&gt;
+&lt;p&gt;包含:&lt;br&gt;    1.</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>记一次排查bug所引发的对冥等设计的思考</title>
+    <link href="http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</id>
+    <published>2021-04-19T12:55:13.000Z</published>
+    <updated>2021-05-12T11:41:04.863Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>IOS数据加载层架构设计</title>
     <link href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     <id>http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</id>
     <published>2021-04-06T10:45:09.000Z</published>
-    <updated>2021-04-08T09:42:35.076Z</updated>
+    <updated>2021-05-12T11:41:04.858Z</updated>
     
     
       
@@ -44,24 +106,11 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/"/>
-    <id>http://example.com/2021/03/08/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</id>
-    <published>2021-03-08T06:31:33.106Z</published>
-    <updated>2021-03-08T06:31:33.106Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>iTerm2终端光标操作</title>
     <link href="http://example.com/2021/02/23/iterm2-cursor/"/>
     <id>http://example.com/2021/02/23/iterm2-cursor/</id>
     <published>2021-02-23T10:52:12.000Z</published>
-    <updated>2021-02-23T10:55:30.078Z</updated>
+    <updated>2021-05-12T11:41:04.861Z</updated>
     
     
       
@@ -86,7 +135,7 @@
     <link href="http://example.com/2021/02/22/ishot-md/"/>
     <id>http://example.com/2021/02/22/ishot-md/</id>
     <published>2021-02-22T11:01:08.000Z</published>
-    <updated>2021-02-22T11:35:35.190Z</updated>
+    <updated>2021-05-12T11:41:04.861Z</updated>
     
     
       
@@ -110,7 +159,7 @@
     <link href="http://example.com/2021/02/22/wang_yang_ming/"/>
     <id>http://example.com/2021/02/22/wang_yang_ming/</id>
     <published>2021-02-22T02:43:54.000Z</published>
-    <updated>2021-02-22T11:04:38.382Z</updated>
+    <updated>2021-05-12T11:41:04.862Z</updated>
     
     
       
@@ -131,7 +180,7 @@
     <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/"/>
     <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</id>
     <published>2021-02-20T10:28:14.000Z</published>
-    <updated>2021-02-22T11:35:31.537Z</updated>
+    <updated>2021-07-06T12:19:55.967Z</updated>
     
     
       
@@ -139,7 +188,13 @@
         
         
     <summary type="html">&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;PTS/DTS&lt;br&gt; 解码时经常看到DTS/PTS,其中 DTS: Decoding Time Stamp, PTS: Presentation Time Stamp&lt;br&gt;</summary>
+&lt;li&gt;&lt;p&gt;视频编码&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧不依靠其他帧信息来渲染&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;帧间压缩 计算当前帧和前后参考帧的向量差进行编码&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;P帧</summary>
         
       
     
@@ -153,7 +208,7 @@
     <link href="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/"/>
     <id>http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</id>
     <published>2021-01-25T12:45:45.000Z</published>
-    <updated>2021-02-20T10:30:42.885Z</updated>
+    <updated>2021-05-12T11:41:04.860Z</updated>
     
     
       
