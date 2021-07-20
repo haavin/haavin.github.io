@@ -21,7 +21,7 @@
 <li>SHA 比 MD5 摘要长，安全性更高；运行速度比 MD5 慢。</li>
 </ul>
 <h2 id="对称加密，非对称加密"><a href="#对称加密，非对称加密" class="headerlink" title="对称加密，非对称加密"></a>对称加密，非对称加密</h2><ul>
-<li>其中非对称加密，有公私钥之分，公钥可以公开传播，私钥只有拥有者持有，不可对外暴露。 </li>
+<li>其中非对称加密，有公私钥之分，公钥可以公开传播，私钥只有拥有者持有，不可对外暴露。</li>
 <li>通过私钥能还原出使用公钥加密过的内容，私钥也也可以用来签名，使用对应公钥解密。</li>
 </ul>
 <h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><ul>
@@ -184,6 +184,17 @@
 ]]></content>
   </entry>
   <entry>
+    <title>截图软件iShot使用技巧</title>
+    <url>/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>用iShot作截图及标注工具非常好用，用了一次就爱了，mark一下</p>
+<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>推荐好用的截图软件iShot</title>
     <url>/2021/02/22/ishot-md/</url>
     <content><![CDATA[<p>基本操作:</p>
@@ -194,7 +205,62 @@
 ]]></content>
   </entry>
   <entry>
-    <title>视频基本知识</title>
+    <title>视频基础知识</title>
+    <url>/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h2 id="视频编解码相关基础"><a href="#视频编解码相关基础" class="headerlink" title="视频编解码相关基础"></a>视频编解码相关基础</h2><ol>
+<li><p>帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧又称关键帧，包含一幅完整画面，解码时不依靠其他帧信息。</p>
+</li>
+<li><p>帧间压缩 计算当前帧和前后参考帧的向量差进行编码</p>
+<ol>
+<li>P帧，又称预测帧，记录了与前一帧画面的差别，需要用前一帧信息生成本帧的画面</li>
+<li>B帧 使用前后帧（可以是P帧，I帧）去做更好的压缩</li>
+</ol>
+</li>
+<li><p>GOP 画面组，多帧的集合，包含 I，P，B 帧</p>
+</li>
+<li><p>目前常用编码器及发展历史</p>
+<ol>
+<li>H.264/AVC 使用需支付专利许可费<br>开源实现：<br>   a.  思科openh264，只支持baseline profile，CPU占用低<br>   b.  x264仅作为编码器使用</li>
+<li>H.265/HEVC 同等画质下比特率减少了50%，使用需要支付0.5%的内容收入。开源实现：x265，硬件厂商如高通 intel 苹果等支持较好</li>
+<li>VP8, google发布libvpx， 开源实现libvpx，硬件支持有限</li>
+<li>VP9，体积比VP8低50%，唯一开源实现libvpx 免费，硬件支持有限</li>
+<li>AVS，我国有自主知识产权，AVS2.0 是同h265，vp9同级的新一代标准。</li>
+<li>MPEG4 也是一种视频压缩格式，采用帧间压缩，仅存储连贯帧之间差别信息，所以其单个画面清晰度高。运动 画面连贯性方面264，265 更好，且具备更高压缩比适合网络传输</li>
+</ol>
+<p><img src="/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2.jpg" alt="avatar"></p>
+</li>
+<li><p>DTS/PTS</p>
+<ul>
+<li>DTS: Decoding Time Stamp,AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</li>
+<li>PTS: Presentation Time Stamp,AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</li>
+<li>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</li>
+</ul>
+</li>
+<li><p>码率: 每秒数据量</p>
+</li>
+<li><p>帧率: 每秒显示的图片数，由于视觉暂留，大于 16 看起来才连贯。</p>
+</li>
+<li><p>音频采样率<br> 模拟-&gt;数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+<li><p>视频内容保护的方法</p>
+<ol>
+<li>CDN令牌 与网站身份认证系统相似</li>
+<li>拥有令牌系统，用户可以下载并分发视频，为避免此情况可以用DRM（实际是既不能防盗版又给正版用户加障碍）</li>
+</ol>
+</li>
+<li><p>RTC(Real-Time Communications)<br>RTC包含采集，编码处理，传输，解码后处理，渲染的功能流程。<br>webRtc是Rtc的一部分，是google专门针对网页前端实时通信的开放框架，可以在 web 浏览器上通过 P2P 协议实现双向实时通信。RTC在直播连麦中采用UDP协议，延时低于几百毫秒。 普通直播采用TCP协议，使用CDN分发，延迟在几秒到十几秒。</p>
+</li>
+<li><p>视频的封装容器</p>
+<ul>
+<li>流式 TS，FLV</li>
+<li>索引式 MP4 MOV AVI 等</li>
+</ul>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>视频基础概念</title>
     <url>/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="视频编解码相关基础"><a href="#视频编解码相关基础" class="headerlink" title="视频编解码相关基础"></a>视频编解码相关基础</h2><ol>
 <li><p>帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧又称关键帧，包含一幅完整画面，解码时不依靠其他帧信息。</p>

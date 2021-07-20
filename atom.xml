@@ -42,7 +42,7 @@
     <link href="http://example.com/2021/07/19/MD5%E4%B8%8ESHA/"/>
     <id>http://example.com/2021/07/19/MD5%E4%B8%8ESHA/</id>
     <published>2021-07-19T11:10:00.000Z</published>
-    <updated>2021-07-20T10:03:31.617Z</updated>
+    <updated>2021-07-20T10:49:25.255Z</updated>
     
     
       
@@ -190,6 +190,31 @@
   </entry>
   
   <entry>
+    <title>截图软件iShot使用技巧</title>
+    <link href="http://example.com/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    <id>http://example.com/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
+    <published>2021-02-22T11:01:08.000Z</published>
+    <updated>2021-07-20T10:47:05.577Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;用iShot作截图及标注工具非常好用，用了一次就爱了，mark一下&lt;/p&gt;
+&lt;p&gt;基本操作:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3.</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>推荐好用的截图软件iShot</title>
     <link href="http://example.com/2021/02/22/ishot-md/"/>
     <id>http://example.com/2021/02/22/ishot-md/</id>
@@ -214,11 +239,33 @@
   </entry>
   
   <entry>
-    <title>视频基本知识</title>
+    <title>视频基础知识</title>
+    <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"/>
+    <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</id>
+    <published>2021-02-20T10:28:14.000Z</published>
+    <updated>2021-07-20T10:45:57.966Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;视频编解码相关基础&quot;&gt;&lt;a href=&quot;#视频编解码相关基础&quot; class=&quot;headerlink&quot; title=&quot;视频编解码相关基础&quot;&gt;&lt;/a&gt;视频编解码相关基础&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>视频基础概念</title>
     <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/"/>
     <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</id>
     <published>2021-02-20T10:28:14.000Z</published>
-    <updated>2021-07-20T10:03:48.633Z</updated>
+    <updated>2021-07-20T10:48:42.501Z</updated>
     
     
       
