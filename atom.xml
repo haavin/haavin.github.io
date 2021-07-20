@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-07-20T10:04:45.428Z</updated>
+  <updated>2021-07-20T11:04:41.642Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,14 +21,14 @@
     <link href="http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
     <id>http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
     <published>2021-07-20T03:26:00.000Z</published>
-    <updated>2021-07-20T10:04:45.428Z</updated>
+    <updated>2021-07-20T11:04:41.642Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;哈希&quot;&gt;&lt;a href=&quot;#哈希&quot; class=&quot;headerlink&quot; title=&quot;哈希&quot;&gt;&lt;/a&gt;哈希&lt;/h2&gt;&lt;p&gt;将 key</summary>
+    <summary type="html">&lt;h3 id=&quot;哈希&quot;&gt;&lt;a href=&quot;#哈希&quot; class=&quot;headerlink&quot; title=&quot;哈希&quot;&gt;&lt;/a&gt;哈希&lt;/h3&gt;&lt;p&gt;将 key</summary>
         
       
     
@@ -76,7 +76,7 @@
     <link href="http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     <id>http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</id>
     <published>2021-04-19T12:56:23.000Z</published>
-    <updated>2021-07-20T10:03:46.869Z</updated>
+    <updated>2021-07-20T11:01:45.670Z</updated>
     
     
       
@@ -84,7 +84,7 @@
         
         
     <summary type="html">&lt;p&gt;AVFoundation 包含了音视频播放，摄像头音视频流采集，媒体编辑等。&lt;/p&gt;
-&lt;h2 id=&quot;音视频播放主要使用&quot;&gt;&lt;a href=&quot;#音视频播放主要使用&quot; class=&quot;headerlink&quot;</summary>
+&lt;h2 id=&quot;音视频播放主要类&quot;&gt;&lt;a href=&quot;#音视频播放主要类&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -98,7 +98,7 @@
     <link href="http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/"/>
     <id>http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/</id>
     <published>2021-04-19T12:56:09.000Z</published>
-    <updated>2021-07-20T10:03:45.046Z</updated>
+    <updated>2021-07-20T11:03:57.705Z</updated>
     
     
       
@@ -119,16 +119,14 @@
     <link href="http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/"/>
     <id>http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</id>
     <published>2021-04-19T12:55:13.000Z</published>
-    <updated>2021-07-07T05:54:36.450Z</updated>
+    <updated>2021-07-20T10:54:32.829Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;起因&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性</summary>
+    <summary type="html">&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -142,20 +140,20 @@
     <link href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     <id>http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</id>
     <published>2021-04-06T10:45:09.000Z</published>
-    <updated>2021-05-12T11:41:04.858Z</updated>
+    <updated>2021-07-20T10:57:34.952Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;之前工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:&lt;/p&gt;
+    <summary type="html">&lt;p&gt;工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;网络请求的包装(AF)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;数据解析(DataParser),需要对空值及错误处理&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重试队列,对网络请求超时处</summary>
+&lt;li&gt;&lt;p&gt;重试队列,对网络请求超时处理&lt;</summary>
         
       
     
@@ -215,65 +213,21 @@
   </entry>
   
   <entry>
-    <title>推荐好用的截图软件iShot</title>
-    <link href="http://example.com/2021/02/22/ishot-md/"/>
-    <id>http://example.com/2021/02/22/ishot-md/</id>
-    <published>2021-02-22T11:01:08.000Z</published>
-    <updated>2021-07-20T10:03:33.654Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;基本操作:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1. option+ A 选取截图区域
-2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
-3. 空格(保存文件 到默认路径) or</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>视频基础知识</title>
+    <title>视频编解码基础概念</title>
     <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/"/>
     <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</id>
     <published>2021-02-20T10:28:14.000Z</published>
-    <updated>2021-07-20T10:45:57.966Z</updated>
+    <updated>2021-07-20T11:04:25.315Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;视频编解码相关基础&quot;&gt;&lt;a href=&quot;#视频编解码相关基础&quot; class=&quot;headerlink&quot; title=&quot;视频编解码相关基础&quot;&gt;&lt;/a&gt;视频编解码相关基础&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>视频基础概念</title>
-    <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/"/>
-    <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</id>
-    <published>2021-02-20T10:28:14.000Z</published>
-    <updated>2021-07-20T10:48:42.501Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;视频编解码相关基础&quot;&gt;&lt;a href=&quot;#视频编解码相关基础&quot; class=&quot;headerlink&quot; title=&quot;视频编解码相关基础&quot;&gt;&lt;/a&gt;视频编解码相关基础&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。</summary>
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧又称关键帧，包含一幅完整画面，解码时不依靠其他帧信息。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;帧间压缩</summary>
         
       
     
