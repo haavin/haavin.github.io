@@ -1,19 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>哈希碰撞冲突的解决</title>
+    <url>/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>将 key 转换为固定长度数组下标，存取&lt;key，value&gt;，当一个索引位置已经存取了某个值，后续通过计算又落到该索引位置时，产生存取冲突。常见解决冲突的方法有:</p>
+<ol>
+<li>开放地址: 产生冲突时，使用线性探测，向后移动 n 个位置。该方式缺点是容易引发元素聚集。</li>
+<li>rehash  发生冲突时，使用第二个，第三个 hash 函数计算地址(比如取第 n 位)，直到无冲突</li>
+<li>链表: 新加的数据更可能是”热数据”，所以将新增加的元素插入链表头部<br>装载因子:  a = 元素个数/hash数组大小，a 在 0.6～0.9 之间，一般取 0.75. 即当存取元素的数组接近装载满时，重新生成一个新的更大数组并将旧数据导入。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>MD5 与 SHA</title>
+    <url>/2021/07/19/MD5%E4%B8%8ESHA/</url>
+    <content><![CDATA[<h2 id="常用的哈希算法"><a href="#常用的哈希算法" class="headerlink" title="常用的哈希算法"></a>常用的哈希算法</h2><p>散列函数又称哈希函数，从任何一种数据中创建小的数字指纹的方法。哈希函数具有雪崩效应，即输入上微小的改变可以使输出产生剧变。</p>
+<ul>
+<li>MD5 信息摘要算法</li>
+<li>SHA 安全哈希算法。 SHA256属于 SHA2 家族， 无论输入多长，都输出 64 个字符，共 32 byte，256bit(0-9，A～F，大小写敏感)。</li>
+<li>SHA 比 MD5 摘要长，安全性更高；运行速度比 MD5 慢。</li>
+</ul>
+<h2 id="对称加密，非对称加密"><a href="#对称加密，非对称加密" class="headerlink" title="对称加密，非对称加密"></a>对称加密，非对称加密</h2><ul>
+<li>其中非对称加密，有公私钥之分，公钥可以公开传播，私钥只有拥有者持有，不可对外暴露。 </li>
+<li>通过私钥能还原出使用公钥加密过的内容，私钥也也可以用来签名，使用对应公钥解密。</li>
+</ul>
+<h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><ul>
+<li>证书包含除公钥信息外， 还有一些额外身份信息，如商户号，公司名等。</li>
+<li>公钥本身不包含持有者身份信息，所以需要 CA 证书认证机构，将公钥+拥有者信息+有效期等进行签名，制作成证书。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title></title>
     <url>/2021/05/12/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
+    <title>AVFoundation播放器</title>
+    <url>/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</url>
+    <content><![CDATA[<p>AVFoundation 包含了音视频播放，摄像头音视频流采集，媒体编辑等。</p>
+<h2 id="音视频播放主要使用"><a href="#音视频播放主要使用" class="headerlink" title="音视频播放主要使用"></a>音视频播放主要使用</h2><ul>
+<li>AVPlayer : 使用 playeritem 创建，KVO 监听播放状态变化</li>
+<li>AVPlayerItem: 播控类 </li>
+<li>AVPlayerLayer 与 player 绑定，视频渲染到该 layer 上</li>
+<li>AVPlayerViewController 系统默认播放 UI套件</li>
+<li>AVAudioPlayer 播放声音</li>
+</ul>
+<h2 id="摄像头音视频流采集"><a href="#摄像头音视频流采集" class="headerlink" title="摄像头音视频流采集"></a>摄像头音视频流采集</h2><p>使用流程</p>
+<ol>
+<li>创建 session:AVCaptureSession</li>
+<li>创建 设备，AVCaptureDevice<ul>
+<li>使用 第 2 步中胡 DEVICE创建 AVCaptureDeviceInput，并加入 session</li>
+<li>创建AVCaptureOutput</li>
+<li>设置 output 代理，加入 session ，在代理的串行线程队列中分析数据流<br>其他:</li>
+</ul>
+<ol>
+<li>AVCaptureVideoPreviewLayer: 摄像头预览</li>
+<li>AVAudioRecorder: 录制声音，暂停/恢复/停止录音</li>
+</ol>
+</li>
+</ol>
+<h2 id="媒体编辑"><a href="#媒体编辑" class="headerlink" title="媒体编辑"></a>媒体编辑</h2><ul>
+<li>只读AVCompositon 由AVCompositionTrack 构成 (他们分别是 AVAsset 和 AVAssetTrack 子类)</li>
+<li>媒体编辑AVMutableComposition+AVMutableCompositionTrack </li>
+<li>访问视频帧和音频样本等更低层的数据: AVAssetReader/AVAssetWriter</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>HLS简谈</title>
     <url>/2021/04/19/HLS%E7%AE%80%E8%B0%88/</url>
-    <content><![CDATA[<p>HLS(HTTP Live Streaming), 是苹果公司提出的基于HTTP的流媒体传输协议.客户端可以根据自身的带宽情况及性能限制,播放不同码流视频.</p>
-<p>封装容器:TS,一般采用h264编码</p>
-<p>包含:<br>    1. m3u8索引文件<br>    2. ts切片文件<br>    3. key加密串<br>缺点: 会生成大量的小文件, 对存储IO造成了比较大的压力<br>解决:内存切片</p>
-<p><a href="https://developer.apple.com/streaming/">https://developer.apple.com/streaming/</a></p>
-<p>TS文件分为三层:<br>es: 音视频数据<br>pes: 在es层上加时间戳<br>ts: 在pes层上增加数据流识别和传输信息</p>
-<p>ts包大小为188字节,</p>
+    <content><![CDATA[<h2 id="HLS-HTTP-Live-Streaming-特点"><a href="#HLS-HTTP-Live-Streaming-特点" class="headerlink" title="HLS(HTTP Live Streaming)特点"></a>HLS(HTTP Live Streaming)特点</h2><p> HLS是苹果公司提出的基于HTTP的流媒体传输协议<a href="https://developer.apple.com/streaming/">https://developer.apple.com/streaming/</a>，其特点如下</p>
+<ul>
+<li>支持自适应码流，客户端可以根据自身的带宽情况及性能限制,播放不同码流视频. </li>
+<li>支持 HTTPS 加密和用户认证</li>
+<li>不需要特殊设备，可在 apache 等 web 服务器上分发<br>主要部分包含:<ol>
+<li>m3u8索引文件: 定义片段文件的位置，时长(EXT-X-TARGETDURATION )，播放顺序等元数据</li>
+<li>ts切片文件</li>
+<li>key加密串(可选)</li>
+</ol>
+</li>
+</ul>
+<h2 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h2><ul>
+<li>延迟<ul>
+<li>解决方案：使用更短的 ts 段。 </li>
+<li>副作用：更频繁的 HTTP 连接缓冲。</li>
+</ul>
+</li>
+<li>会生成大量的小文件, 对存储IO造成了比较大的压力。<ul>
+<li>解决方案:内存切片</li>
+</ul>
+</li>
+</ul>
+<h2 id="TS文件的三层结构"><a href="#TS文件的三层结构" class="headerlink" title="TS文件的三层结构:"></a>TS文件的三层结构:</h2><ul>
+<li>es: 音视频数据</li>
+<li>pes: 在es层上加时间戳</li>
+<li>ts: 在pes层上增加数据流识别和传输信息，ts包大小一般为188字节</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>记一次排查bug所引发的对冥等设计的思考</title>
+    <url>/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<p>起因</p>
+<blockquote>
+<p>项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性，这意味着cell没有实现内存复用，在数据量大的时候会产生内存暴涨问题。</p>
+</blockquote>
+<p>解决</p>
+<blockquote>
+<p>通过调试，发现tableview在对cell设置数据（setModel）后，未重置折叠展开的状态位S1。 setModel没有直接调用 -layoutsubview，但会通过setNeedsLayout被系统模板方法在某个合适时机间接调用到layoutsubview，而该方法会通过S1呈现展开或收起的状态。</p>
+</blockquote>
+<p>反思</p>
+<blockquote>
+<p>setModel作为暴露给外部使用的接口，要考虑幂等设计：即第一次调用跟第N次调用产生的效果是一样的。<br>要处理类似问题，开发人员除了清楚了解自己写的逻辑，也要清晰理解系统调用和运行机制。</p>
+</blockquote>
 ]]></content>
   </entry>
   <entry>
@@ -66,6 +166,89 @@
 ]]></content>
   </entry>
   <entry>
+    <title>iTerm2快捷键</title>
+    <url>/2021/02/23/iterm2-cursor/</url>
+    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>推荐好用的截图软件iShot</title>
+    <url>/2021/02/22/ishot-md/</url>
+    <content><![CDATA[<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>视频基本知识</title>
+    <url>/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="视频编解码相关基础"><a href="#视频编解码相关基础" class="headerlink" title="视频编解码相关基础"></a>视频编解码相关基础</h2><ol>
+<li><p>帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧又称关键帧，包含一幅完整画面，解码时不依靠其他帧信息。</p>
+</li>
+<li><p>帧间压缩 计算当前帧和前后参考帧的向量差进行编码</p>
+<ol>
+<li>P帧，又称预测帧，记录了与前一帧画面的差别，需要用前一帧信息生成本帧的画面</li>
+<li>B帧 使用前后帧（可以是P帧，I帧）去做更好的压缩</li>
+</ol>
+</li>
+<li><p>GOP 画面组，多帧的集合，包含 I，P，B 帧</p>
+</li>
+<li><p>目前常用编码器及发展历史</p>
+<ol>
+<li>H.264/AVC 使用需支付专利许可费<br>开源实现：<br>   a.  思科openh264，只支持baseline profile，CPU占用低<br>   b.  x264仅作为编码器使用</li>
+<li>H.265/HEVC 同等画质下比特率减少了50%，使用需要支付0.5%的内容收入。开源实现：x265，硬件厂商如高通 intel 苹果等支持较好</li>
+<li>VP8, google发布libvpx， 开源实现libvpx，硬件支持有限</li>
+<li>VP9，体积比VP8低50%，唯一开源实现libvpx 免费，硬件支持有限</li>
+<li>AVS，我国有自主知识产权，AVS2.0 是同h265，vp9同级的新一代标准。</li>
+<li>MPEG4 也是一种视频压缩格式，采用帧间压缩，仅存储连贯帧之间差别信息，所以其单个画面清晰度高。运动 画面连贯性方面264，265 更好，且具备更高压缩比适合网络传输</li>
+</ol>
+<p><img src="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2.jpg" alt="avatar"></p>
+</li>
+<li><p>DTS/PTS</p>
+<ul>
+<li>DTS: Decoding Time Stamp,AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</li>
+<li>PTS: Presentation Time Stamp,AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</li>
+<li>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</li>
+</ul>
+</li>
+<li><p>码率: 每秒数据量</p>
+</li>
+<li><p>帧率: 每秒显示的图片数，由于视觉暂留，大于 16 看起来才连贯。</p>
+</li>
+<li><p>音频采样率<br> 模拟-&gt;数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+<li><p>视频内容保护的方法</p>
+<ol>
+<li>CDN令牌 与网站身份认证系统相似</li>
+<li>拥有令牌系统，用户可以下载并分发视频，为避免此情况可以用DRM（实际是既不能防盗版又给正版用户加障碍）</li>
+</ol>
+</li>
+<li><p>RTC(Real-Time Communications)<br>RTC包含采集，编码处理，传输，解码后处理，渲染的功能流程。<br>webRtc是Rtc的一部分，是google专门针对网页前端实时通信的开放框架，可以在 web 浏览器上通过 P2P 协议实现双向实时通信。RTC在直播连麦中采用UDP协议，延时低于几百毫秒。 普通直播采用TCP协议，使用CDN分发，延迟在几秒到十几秒。</p>
+</li>
+<li><p>视频的封装容器</p>
+<ul>
+<li>流式 TS，FLV</li>
+<li>索引式 MP4 MOV AVI 等</li>
+</ul>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>NSObject alloc实现</title>
     <url>/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p>有两种alloc实现</p>
@@ -90,98 +273,5 @@
       <tags>
         <tag>IOS</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>AVFoundation播放器</title>
-    <url>/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>推荐好用的截图软件iShot</title>
-    <url>/2021/02/22/ishot-md/</url>
-    <content><![CDATA[<p>基本操作:</p>
-<pre><code>1. option+ A 选取截图区域
-2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
-3. 空格(保存文件 到默认路径) or 回车到剪贴板
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>iTerm2快捷键</title>
-    <url>/2021/02/23/iterm2-cursor/</url>
-    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
-<ol>
-<li><p>删除</p>
-<blockquote>
-<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
-</blockquote>
-</li>
-<li><p>光标移动</p>
-<blockquote>
-<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>视频编解码相关</title>
-    <url>/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<ol>
-<li><p>视频编码</p>
-<ol>
-<li><p>帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧不依靠其他帧信息来渲染</p>
-</li>
-<li><p>帧间压缩 计算当前帧和前后参考帧的向量差进行编码</p>
-<ol>
-<li>P帧 当前的画面使用之前一I帧的引用和差值进行渲染</li>
-<li>B帧 使用前后帧（可以是P帧，I帧）去做更好的压缩</li>
-</ol>
-</li>
-<li><p>常用编码器</p>
-<ol>
-<li><p>H.264/AVC 使用需支付专利许可费<br>开源实现：<br>   a. 思科openh264，只支持baseline profile，CPU占用低<br>   b. x264仅作为编码器使用</p>
-</li>
-<li><p>H.265/HEVC 同等画质下比特率减少了50%，使用需要支付0.5%的内容收入<br>开源实现：x265</p>
-</li>
-<li><p>VP8, google发布libvpx， 开源实现libvpx</p>
-</li>
-<li><p>VP9，体积比VP8低50%，唯一开源实现libvpx 免费</p>
-</li>
-<li><p>AVS，我国有自主知识产权，AVS2.0 是同h265，vp9同级的新一代标准<br>其中vp8，vp9硬件支持有限，H264，H265编解码器在苹果，高通，intel芯片上支持较好。</p>
-</li>
-</ol>
-</li>
-</ol>
-<p><img src="/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2.jpg" alt="avatar"></p>
-</li>
-<li><p>视频解码</p>
-<ol>
-<li>DTS: Decoding Time Stamp,AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</li>
-<li>PTS: Presentation Time Stamp,AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</li>
-<li>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</li>
-<li>音频采样率<br>模拟-&gt;数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br>可变帧率其采样间隔不等,需要用ms处理</li>
-</ol>
-</li>
-<li><p>视频内容保护</p>
-<ol>
-<li>CDN令牌 与网站身份认证系统相似</li>
-<li>拥有令牌系统，用户可以下载并分发视频，为避免此情况可以用DRM（实际是既不能防盗版又给正版用户加障碍）</li>
-</ol>
-</li>
-<li><p>RTC(Real-Time Communications)<br>RTC包含采集，编码处理，传输，解码后处理，渲染的功能流程。<br>webRtc是Rtc的一部分，是google专门针对网页前端实时通信的标准及开源项目。RTC在直播连麦中采用UDP协议，延时低于几百毫秒。 普通直播采用TCP协议，使用CDN分发，延迟在几秒到十几秒</p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>记一次排查bug所引发的对冥等设计的思考</title>
-    <url>/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<p><strong>起因</strong> </p>
-<p>项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性，这意味着cell没有实现内存复用，在数据量大的时候会产生内存暴涨问题。</p>
-<p><strong>解决</strong></p>
-<p>通过调试，发现tableview在对cell设置数据（setModel）后，未重置折叠展开的状态位S1。 setModel没有直接调用 -layoutsubview，但会通过setNeedsLayout被系统模板方法在某个合适时机间接调用到layoutsubview，而该方法会通过S1呈现展开或收起的状态。</p>
-<h1 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h1><p>setModel作为暴露给外部使用的接口，要考虑幂等设计：即第一次调用跟第N次调用产生的效果是一样的。要处理好这个问题，除了开发人员清楚的了解自己写的代码逻辑，也要清晰的理解系统调用机制。</p>
-]]></content>
   </entry>
 </search>

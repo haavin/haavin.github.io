@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-05-12T11:41:04.862Z</updated>
+  <updated>2021-07-20T10:04:45.428Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>哈希碰撞冲突的解决</title>
+    <link href="http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
+    <id>http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
+    <published>2021-07-20T03:26:00.000Z</published>
+    <updated>2021-07-20T10:04:45.428Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;哈希&quot;&gt;&lt;a href=&quot;#哈希&quot; class=&quot;headerlink&quot; title=&quot;哈希&quot;&gt;&lt;/a&gt;哈希&lt;/h2&gt;&lt;p&gt;将 key</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MD5 与 SHA</title>
+    <link href="http://example.com/2021/07/19/MD5%E4%B8%8ESHA/"/>
+    <id>http://example.com/2021/07/19/MD5%E4%B8%8ESHA/</id>
+    <published>2021-07-19T11:10:00.000Z</published>
+    <updated>2021-07-20T10:03:31.617Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;常用的哈希算法&quot;&gt;&lt;a href=&quot;#常用的哈希算法&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title></title>
@@ -34,8 +76,17 @@
     <link href="http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     <id>http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</id>
     <published>2021-04-19T12:56:23.000Z</published>
-    <updated>2021-05-12T11:41:04.857Z</updated>
+    <updated>2021-07-20T10:03:46.869Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;AVFoundation 包含了音视频播放，摄像头音视频流采集，媒体编辑等。&lt;/p&gt;
+&lt;h2 id=&quot;音视频播放主要使用&quot;&gt;&lt;a href=&quot;#音视频播放主要使用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
     
     
     
@@ -47,16 +98,14 @@
     <link href="http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/"/>
     <id>http://example.com/2021/04/19/HLS%E7%AE%80%E8%B0%88/</id>
     <published>2021-04-19T12:56:09.000Z</published>
-    <updated>2021-05-12T11:41:04.857Z</updated>
+    <updated>2021-07-20T10:03:45.046Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;HLS(HTTP Live Streaming), 是苹果公司提出的基于HTTP的流媒体传输协议.客户端可以根据自身的带宽情况及性能限制,播放不同码流视频.&lt;/p&gt;
-&lt;p&gt;封装容器:TS,一般采用h264编码&lt;/p&gt;
-&lt;p&gt;包含:&lt;br&gt;    1.</summary>
+    <summary type="html">&lt;h2 id=&quot;HLS-HTTP-Live-Streaming-特点&quot;&gt;&lt;a href=&quot;#HLS-HTTP-Live-Streaming-特点&quot; class=&quot;headerlink&quot; title=&quot;HLS(HTTP Live</summary>
         
       
     
@@ -70,14 +119,16 @@
     <link href="http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/"/>
     <id>http://example.com/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</id>
     <published>2021-04-19T12:55:13.000Z</published>
-    <updated>2021-07-07T03:37:11.714Z</updated>
+    <updated>2021-07-07T05:54:36.450Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;&lt;strong&gt;起因&lt;/strong&gt;</summary>
+    <summary type="html">&lt;p&gt;起因&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性</summary>
         
       
     
@@ -143,7 +194,7 @@
     <link href="http://example.com/2021/02/22/ishot-md/"/>
     <id>http://example.com/2021/02/22/ishot-md/</id>
     <published>2021-02-22T11:01:08.000Z</published>
-    <updated>2021-05-12T11:41:04.861Z</updated>
+    <updated>2021-07-20T10:03:33.654Z</updated>
     
     
       
@@ -163,25 +214,19 @@
   </entry>
   
   <entry>
-    <title>视频编解码相关</title>
+    <title>视频基本知识</title>
     <link href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/"/>
     <id>http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E7%BC%96%E8%A7%A3%E7%A0%81%E7%9B%B8%E5%85%B3/</id>
     <published>2021-02-20T10:28:14.000Z</published>
-    <updated>2021-07-06T12:19:55.967Z</updated>
+    <updated>2021-07-20T10:03:48.633Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;视频编码&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧不依靠其他帧信息来渲染&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;帧间压缩 计算当前帧和前后参考帧的向量差进行编码&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;P帧</summary>
+    <summary type="html">&lt;h2 id=&quot;视频编解码相关基础&quot;&gt;&lt;a href=&quot;#视频编解码相关基础&quot; class=&quot;headerlink&quot; title=&quot;视频编解码相关基础&quot;&gt;&lt;/a&gt;视频编解码相关基础&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;帧内压缩 将每帧当作一张图片，采用图片压缩算法。</summary>
         
       
     
