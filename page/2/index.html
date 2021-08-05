@@ -175,6 +175,375 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">IOS数据加载层架构设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 18:45:09" itemprop="dateCreated datePublished" datetime="2021-04-06T18:45:09+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-20 18:57:34" itemprop="dateModified" datetime="2021-07-20T18:57:34+08:00">2021-07-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
+<ul>
+<li><p>网络请求的包装(AF)</p>
+</li>
+<li><p>数据解析(DataParser),需要对空值及错误处理</p>
+</li>
+<li><p>重试队列,对网络请求超时处理</p>
+</li>
+<li><p>对请求进行统一的加工</p>
+<ul>
+<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
+<li>根据请求参数进行请求签名</li>
+</ul>
+</li>
+<li><p>日志</p>
+<ul>
+<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
+<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
+</ul>
+</li>
+<li><p>缓存的读取及写入</p>
+<ul>
+<li>内存+硬盘 缓存方案可由调用方指定</li>
+<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
+<li>代码简单</li>
+<li>自带线程安全</li>
+<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
+<li>内存警告时能自动清理内存数据</li>
+</ul>
+</li>
+<li>持久化写入<ul>
+<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
+<li>写入temp目录,由系统自动清理</li>
+<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
+</ul>
+</li>
+</ul>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>附架构图设计如下:</p>
+<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/23/iterm2-cursor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/23/iterm2-cursor/" class="post-title-link" itemprop="url">iTerm2快捷键</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-23 18:52:12" itemprop="dateCreated datePublished" datetime="2021-02-23T18:52:12+08:00">2021-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-07 13:43:38" itemprop="dateModified" datetime="2021-07-07T13:43:38+08:00">2021-07-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">截图软件iShot使用技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-22 19:01:08" itemprop="dateCreated datePublished" datetime="2021-02-22T19:01:08+08:00">2021-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-20 18:47:05" itemprop="dateModified" datetime="2021-07-20T18:47:05+08:00">2021-07-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用iShot作截图及标注工具非常好用，用了一次就爱了，mark一下</p>
+<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="L KK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="haavin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">视频编解码基础概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-20 18:28:14" itemprop="dateCreated datePublished" datetime="2021-02-20T18:28:14+08:00">2021-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-20 19:04:25" itemprop="dateModified" datetime="2021-07-20T19:04:25+08:00">2021-07-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>帧内压缩 将每帧当作一张图片，采用图片压缩算法。 I帧又称关键帧，包含一幅完整画面，解码时不依靠其他帧信息。</p>
+</li>
+<li><p>帧间压缩 计算当前帧和前后参考帧的向量差进行编码</p>
+<ol>
+<li>P帧，又称预测帧，记录了与前一帧画面的差别，需要用前一帧信息生成本帧的画面</li>
+<li>B帧 使用前后帧（可以是P帧，I帧）去做更好的压缩</li>
+</ol>
+</li>
+<li><p>GOP 画面组，多帧的集合，包含 I，P，B 帧</p>
+</li>
+<li><p>目前常用编码器及发展历史</p>
+<ol>
+<li>H.264/AVC 使用需支付专利许可费<br>开源实现：<br>   a.  思科openh264，只支持baseline profile，CPU占用低<br>   b.  x264仅作为编码器使用</li>
+<li>H.265/HEVC 同等画质下比特率减少了50%，使用需要支付0.5%的内容收入。开源实现：x265，硬件厂商如高通 intel 苹果等支持较好</li>
+<li>VP8, google发布libvpx， 开源实现libvpx，硬件支持有限</li>
+<li>VP9，体积比VP8低50%，唯一开源实现libvpx 免费，硬件支持有限</li>
+<li>AVS，我国有自主知识产权，AVS2.0 是同h265，vp9同级的新一代标准。</li>
+<li>MPEG4 也是一种视频压缩格式，采用帧间压缩，仅存储连贯帧之间差别信息，所以其单个画面清晰度高。运动 画面连贯性方面264，265 更好，且具备更高压缩比适合网络传输</li>
+</ol>
+<p><img src="/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2.jpg" alt="avatar"></p>
+</li>
+<li><p>DTS/PTS</p>
+<ul>
+<li>DTS: Decoding Time Stamp,AVPacket 解码前/编码后的包, DTS是packet里的成员,表示该什么时候解码.</li>
+<li>PTS: Presentation Time Stamp,AVFrame 解码后/编码前的信号帧,表示视频的一帧图像, PTS是AVFrame成员, 决定何时呈现</li>
+<li>为什么DTS与PTS不一定一致? 视频里的编码不一定是按显示顺序依次进行的, H264/HEVC编码标准里,出现B帧时,编码和输入顺序不一致.</li>
+</ul>
+</li>
+<li><p>码率: 每秒数据量</p>
+</li>
+<li><p>帧率: 每秒显示的图片数，由于视觉暂留，大于 16 看起来才连贯。</p>
+</li>
+<li><p>音频采样率<br> 模拟-&gt;数字化, 每秒抽取声波幅度样本次数.例如:音频1024 sample, 44.1k采样率, 1000*1024/44100 = 23.21ms<br> 可变帧率其采样间隔不等,需要用ms处理</p>
+</li>
+<li><p>视频内容保护的方法</p>
+<ol>
+<li>CDN令牌 与网站身份认证系统相似</li>
+<li>拥有令牌系统，用户可以下载并分发视频，为避免此情况可以用DRM（实际是既不能防盗版又给正版用户加障碍）</li>
+</ol>
+</li>
+<li><p>RTC(Real-Time Communications)<br>RTC包含采集，编码处理，传输，解码后处理，渲染的功能流程。<br>webRtc是Rtc的一部分，是google专门针对网页前端实时通信的开放框架，可以在 web 浏览器上通过 P2P 协议实现双向实时通信。RTC在直播连麦中采用UDP协议，延时低于几百毫秒。 普通直播采用TCP协议，使用CDN分发，延迟在几秒到十几秒。</p>
+</li>
+<li><p>视频的封装容器</p>
+<ul>
+<li>流式 TS，FLV</li>
+<li>索引式 MP4 MOV AVI 等</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -322,7 +691,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

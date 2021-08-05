@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-07-20T11:04:41.642Z</updated>
+  <updated>2021-08-05T02:05:28.785Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,18 +17,103 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>哈希碰撞冲突的解决</title>
+    <title></title>
+    <link href="http://example.com/2021/08/05/configs/sorts/"/>
+    <id>http://example.com/2021/08/05/configs/sorts/</id>
+    <published>2021-08-05T02:05:14.311Z</published>
+    <updated>2021-08-05T02:05:28.785Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">{&quot;&quot;:[&quot;protobuf.md&quot;,&quot;哈希碰撞冲突的解决.md&quot;,&quot;网络.md&quot;,&quot;操作系统.md&quot;,&quot;视频基础概念.md&quot;,&quot;hls简谈.md&quot;,&quot;avfoundation播放器.md&quot;,&quot;wang_yang_ming.md&quot;,&quot;ios数据加载层架构设计.md&quot;,&quot;记一次排查</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Protobuf</title>
+    <link href="http://example.com/2021/08/02/Protobuf/"/>
+    <id>http://example.com/2021/08/02/Protobuf/</id>
+    <published>2021-08-02T08:05:00.000Z</published>
+    <updated>2021-08-04T11:23:39.451Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Protobuf是google提出的数据交换格式。其需要高压缩传输及解析数据的场景中， 可以考虑用protobuf 取代</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统</title>
+    <link href="http://example.com/2021/07/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://example.com/2021/07/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</id>
+    <published>2021-07-22T03:39:00.000Z</published>
+    <updated>2021-07-27T08:58:41.553Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;死锁&lt;br&gt;根源在于资源的抢占，并且，多个进程间形成了循环依赖，即得不到被其他进程占用的资源，也不释放自己已经占据的资源。&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网络基础问答</title>
+    <link href="http://example.com/2021/07/21/%E7%BD%91%E7%BB%9C/"/>
+    <id>http://example.com/2021/07/21/%E7%BD%91%E7%BB%9C/</id>
+    <published>2021-07-21T08:07:00.000Z</published>
+    <updated>2021-08-05T06:33:43.118Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;TCP-IP-协议簇自顶向下包含哪些部分？&quot;&gt;&lt;a href=&quot;#TCP-IP-协议簇自顶向下包含哪些部分？&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP 协议簇自顶向下包含哪些部分？&quot;&gt;&lt;/a&gt;TCP/IP</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>哈希</title>
     <link href="http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
     <id>http://example.com/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
     <published>2021-07-20T03:26:00.000Z</published>
-    <updated>2021-07-20T11:04:41.642Z</updated>
+    <updated>2021-08-04T08:45:43.746Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h3 id=&quot;哈希&quot;&gt;&lt;a href=&quot;#哈希&quot; class=&quot;headerlink&quot; title=&quot;哈希&quot;&gt;&lt;/a&gt;哈希&lt;/h3&gt;&lt;p&gt;将 key</summary>
+    <summary type="html">&lt;h3 id=&quot;哈希&quot;&gt;&lt;a href=&quot;#哈希&quot; class=&quot;headerlink&quot; title=&quot;哈希&quot;&gt;&lt;/a&gt;哈希&lt;/h3&gt;&lt;p&gt;&lt;code&gt;index = hash%length&lt;/code&gt;  length</summary>
         
       
     
