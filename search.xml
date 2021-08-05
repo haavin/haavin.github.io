@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/08/05/configs/sorts/</url>
-    <content><![CDATA[{"":["protobuf.md","哈希碰撞冲突的解决.md","网络.md","操作系统.md","视频基础概念.md","hls简谈.md","avfoundation播放器.md","wang_yang_ming.md","ios数据加载层架构设计.md","记一次排查bug所引发的对冥等设计的思考.md","md5与sha.md","ishot使用技巧.md"," iterm2使用.md","iterm2-cursor.md","苹果帐号.markdown","markdown-cheet-sheet.md","hello-world.md","nsobject-alloc实现.md","avfoundation播放器","hls简谈","ios数据加载层架构设计","网络","视频基础概念","记一次排查bug所引发的对冥等设计的思考","_help"],"__positions":{"哈希碰撞冲突的解决.md":2,"md5与sha.md":11,"hls简谈":20,"avfoundation播放器":19,"wang_yang_ming.md":8,"记一次排查bug所引发的对冥等设计的思考.md":10,"ishot使用技巧.md":12,"_help/功能介绍":25001,"nsobject-alloc实现.md":18,"网络.md":3,"avfoundation播放器.md":7,"_help":25,"hls简谈.md":6,"_help/写作语法":25002,"记一次排查bug所引发的对冥等设计的思考":24," iterm2使用.md":13,"protobuf.md":1,"ios数据加载层架构设计":21,"iterm2-cursor.md":14,"markdown-cheet-sheet.md":16,"操作系统.md":4,"苹果帐号.markdown":15,"ios数据加载层架构设计.md":9,"hello-world.md":17,"视频基础概念":23,"网络":22,"视频基础概念.md":5,"_help/其它":25003},"_help":["功能介绍","写作语法","其它"],"__raw_positions":{"哈希碰撞冲突的解决.md":2,"md5与sha.md":11,"hls简谈":20,"avfoundation播放器":19,"iterm2-cursor.md":14,"记一次排查bug所引发的对冥等设计的思考.md":10,"ishot使用技巧.md":12,"wang_yang_ming.md":8,"nsobject-alloc实现.md":18,"网络.md":3,"avfoundation播放器.md":7,"_help":25,"hls简谈.md":6,"_help/写作语法":2,"记一次排查bug所引发的对冥等设计的思考":24," iterm2使用.md":13,"protobuf.md":1,"ios数据加载层架构设计":21,"_help/功能介绍":1,"markdown-cheet-sheet.md":16,"操作系统.md":4,"苹果帐号.markdown":15,"ios数据加载层架构设计.md":9,"hello-world.md":17,"视频基础概念":23,"网络":22,"视频基础概念.md":5,"_help/其它":3}}]]></content>
-  </entry>
-  <entry>
     <title>Protobuf</title>
     <url>/2021/08/02/Protobuf/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Protobuf是google提出的数据交换格式。其需要高压缩传输及解析数据的场景中， 可以考虑用protobuf 取代 json/xml。google 官方测试报告显示，同一条消息数据，protobuf 序列化后占用空间是 json 的 1/10，xml 的 1/20，但性能却是几十倍。</p>
