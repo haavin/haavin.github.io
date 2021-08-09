@@ -1,6 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2021/05/12/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>AVFoundation播放器</title>
+    <url>/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</url>
+    <content><![CDATA[<p>AVFoundation 包含了音视频播放，摄像头音视频流采集，媒体编辑等。</p>
+<h2 id="音视频播放主要类"><a href="#音视频播放主要类" class="headerlink" title="音视频播放主要类"></a>音视频播放主要类</h2><ul>
+<li>AVPlayer : 使用 playeritem 创建，KVO 监听播放状态变化</li>
+<li>AVPlayerItem: 播控</li>
+<li>AVPlayerLayer 与 player 绑定，视频渲染到该 layer 上</li>
+<li>AVPlayerViewController 系统默认播放 UI套件</li>
+<li>AVAudioPlayer 播放声音</li>
+</ul>
+<h2 id="摄像头音视频流采集"><a href="#摄像头音视频流采集" class="headerlink" title="摄像头音视频流采集"></a>摄像头音视频流采集</h2><p>使用流程</p>
+<ol>
+<li>创建 session:AVCaptureSession</li>
+<li>创建 设备，AVCaptureDevice<ul>
+<li>使用 第 2 步中胡 DEVICE创建 AVCaptureDeviceInput，并加入 session</li>
+<li>创建AVCaptureOutput</li>
+<li>设置 output 代理，加入 session ，在代理的串行线程队列中分析数据流<br>其他:</li>
+</ul>
+<ol>
+<li>AVCaptureVideoPreviewLayer: 摄像头预览</li>
+<li>AVAudioRecorder: 录制声音，暂停/恢复/停止录音</li>
+</ol>
+</li>
+</ol>
+<h2 id="媒体编辑"><a href="#媒体编辑" class="headerlink" title="媒体编辑"></a>媒体编辑</h2><ul>
+<li>只读AVCompositon 由AVCompositionTrack 构成 (他们分别是 AVAsset 和 AVAssetTrack 子类)</li>
+<li>媒体编辑AVMutableComposition+AVMutableCompositionTrack</li>
+<li>访问视频帧和音频样本等更低层的数据: AVAssetReader/AVAssetWriter</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>HLS简谈</title>
+    <url>/2021/04/19/HLS%E7%AE%80%E8%B0%88/</url>
+    <content><![CDATA[<h2 id="HLS-HTTP-Live-Streaming-特点"><a href="#HLS-HTTP-Live-Streaming-特点" class="headerlink" title="HLS(HTTP Live Streaming)特点"></a>HLS(HTTP Live Streaming)特点</h2><p> HLS是苹果公司提出的基于HTTP的流媒体传输协议<a href="https://developer.apple.com/streaming/">https://developer.apple.com/streaming/</a>，其特点如下</p>
+<ul>
+<li>支持自适应码流，客户端可以根据自身的带宽情况及性能限制,播放不同码流视频.</li>
+<li>支持 HTTPS 加密和用户认证</li>
+<li>不需要特殊设备，可在 apache 等 web 服务器上分发</li>
+</ul>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ol>
+<li>m3u8索引文件: 定义片段文件的位置，时长(EXT-X-TARGETDURATION )，播放顺序等元数据</li>
+<li>ts切片文件，由三层构成<ul>
+<li>es: 音视频数据</li>
+<li>pes: 在es层上加时间戳</li>
+<li>ts: 在pes层上增加数据流识别和传输信息，ts包大小一般为188字节</li>
+</ul>
+</li>
+<li>key加密串(可选)</li>
+</ol>
+<h2 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h2><ul>
+<li>延迟<ul>
+<li>解决方案：使用更短的 ts 段。</li>
+<li>副作用：更频繁的 HTTP 连接缓冲。</li>
+</ul>
+</li>
+<li>会生成大量的小文件, 对存储IO造成了比较大的压力。<ul>
+<li>解决方案:内存切片</li>
+</ul>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>IOS数据加载层架构设计</title>
+    <url>/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<p>工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
+<ul>
+<li><p>网络请求的包装(AF)</p>
+</li>
+<li><p>数据解析(DataParser),需要对空值及错误处理</p>
+</li>
+<li><p>重试队列,对网络请求超时处理</p>
+</li>
+<li><p>对请求进行统一的加工</p>
+<ul>
+<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
+<li>根据请求参数进行请求签名</li>
+</ul>
+</li>
+<li><p>日志</p>
+<ul>
+<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
+<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
+</ul>
+</li>
+<li><p>缓存的读取及写入</p>
+<ul>
+<li>内存+硬盘 缓存方案可由调用方指定</li>
+<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
+<li>代码简单</li>
+<li>自带线程安全</li>
+<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
+<li>内存警告时能自动清理内存数据</li>
+</ul>
+</li>
+<li>持久化写入<ul>
+<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
+<li>写入temp目录,由系统自动清理</li>
+<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
+</ul>
+</li>
+</ul>
+<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>附架构图设计如下:</p>
+<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>MD5 与 SHA</title>
+    <url>/2021/07/19/MD5%E4%B8%8ESHA/</url>
+    <content><![CDATA[<h2 id="常用的哈希算法"><a href="#常用的哈希算法" class="headerlink" title="常用的哈希算法"></a>常用的哈希算法</h2><p>散列函数又称哈希函数，从任何一种数据中创建小的数字指纹的方法。哈希函数具有雪崩效应，即输入上微小的改变可以使输出产生剧变。</p>
+<ul>
+<li>MD5 信息摘要算法</li>
+<li>SHA 安全哈希算法。 SHA256属于 SHA2 家族， 无论输入多长，都输出 64 个字符，共 32 byte，256bit(0-9，A～F，大小写敏感)。</li>
+<li>SHA 比 MD5 摘要长，安全性更高；运行速度比 MD5 慢。</li>
+</ul>
+<h2 id="对称加密，非对称加密"><a href="#对称加密，非对称加密" class="headerlink" title="对称加密，非对称加密"></a>对称加密，非对称加密</h2><ul>
+<li>其中非对称加密，有公私钥之分，公钥可以公开传播，私钥只有拥有者持有，不可对外暴露。</li>
+<li>通过私钥能还原出使用公钥加密过的内容，私钥也也可以用来签名，使用对应公钥解密。</li>
+</ul>
+<h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><ul>
+<li>证书包含除公钥信息外， 还有一些额外身份信息，如商户号，公司名等。</li>
+<li>公钥本身不包含持有者身份信息，所以需要 CA 证书认证机构，将公钥+拥有者信息+有效期等进行签名，制作成证书。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>NSObject alloc实现</title>
+    <url>/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>有两种alloc实现</p>
+<ol>
+<li><p>GNUstep(Cocoa互换框架 )</p>
+<p> NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明, 现在的运行时系统内存管理已极具效率,使用NSZone反而效率低下源码复杂.</p>
+<p> alloc简化版,引用计数信息写入对象内存头部</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>&#123;</span></span><br><span class="line">    NSUinteger retained;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+(id)alloc&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="keyword">sizeof</span>(stuct obj_layout)+对象大小</span><br><span class="line">    struct obj_layout *p = (struct obj_layout*) <span class="built_in">calloc</span>(<span class="number">1</span>,size);</span><br><span class="line">    <span class="keyword">return</span>(id)(p+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)release&#123;</span><br><span class="line">    <span class="keyword">if</span>(decrementeExtraRefCountWasZero(self))</span><br><span class="line">    [self dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>*<span class="title">p</span> =</span> &amp; ((struct obj_layout *)self)[<span class="number">-1</span>];</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> Q:当retained变量超出最大值时会发生什么?<br> A:retain方法会抛出异常</p>
+</li>
+<li><p>Apple实现</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">CFSpinLock_t lock;</span><br><span class="line">CFBasicHashRef table;</span><br><span class="line"><span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line"></span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">            __CFSpinLock(lock);</span><br><span class="line">            CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">            __CFSpinUnlock(lock);</span><br><span class="line">            <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>  __CFDoExternRefOperation 按照retainCount/retain/release 调用不同的函数.<br>  alloc通过多个散列表来管理引用计数,对每个引用计数表的访问都需要配合spinlock.<br> <code>CFBasicHashRef table = __NSRetainCounters[idx].table;</code> 从该行代码看,APPLE是通过多个散列表来管理引用计数,每个NSRetainCounters结构体里有spinlock和table,执行引用计数操作时是线程安全的.</p>
+</li>
+<li><p>两种实现对比</p>
+<p> GNUstep实现简单高效,代码少, 内存块需考虑头部(指针地址偏移);<br> 苹果的实现较为复杂通过引用计数表查到内存块.<br> 苹果实现好处是:方便调试,即使对象内存块损坏, 只要引用计数表没有被破话, 就能够确认内存块位置; <strong><em>在检测内存泄漏时,有助于检测各对象的持有者是否存在.</em></strong></p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>IOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Protobuf</title>
     <url>/2021/08/02/Protobuf/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Protobuf是google提出的数据交换格式。其需要高压缩传输及解析数据的场景中， 可以考虑用protobuf 取代 json/xml。google 官方测试报告显示，同一条消息数据，protobuf 序列化后占用空间是 json 的 1/10，xml 的 1/20，但性能却是几十倍。</p>
@@ -14,9 +177,114 @@
 ]]></content>
   </entry>
   <entry>
-    <title>操作系统</title>
+    <title>截图软件iShot使用技巧</title>
+    <url>/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>用iShot作截图及标注工具非常好用，用了一次就爱了，mark一下</p>
+<p>基本操作:</p>
+<pre><code>1. option+ A 选取截图区域
+2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
+3. 空格(保存文件 到默认路径) or 回车到剪贴板
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>iTerm2快捷键</title>
+    <url>/2021/02/23/iterm2-cursor/</url>
+    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除</p>
+<blockquote>
+<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
+</blockquote>
+</li>
+<li><p>光标移动</p>
+<blockquote>
+<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>哈希</title>
+    <url>/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><p><code>index = hash%length</code>  length 一般取素数，以使得求模运算出来的冲突更少（可以提前计算出素数表存起来）<br>将 key 转换为固定长度数组下标，存取&lt;key，value&gt;。  </p>
+<h3 id="解决冲突常见方法"><a href="#解决冲突常见方法" class="headerlink" title="解决冲突常见方法"></a>解决冲突常见方法</h3><p>当一个索引位置已经存取了某个值，后续通过计算又落到该索引位置时，产生存取冲突，解决方法有：</p>
+<ol>
+<li>开放地址: 产生冲突时，使用线性探测，向后移动 n 个位置。该方式缺点是容易引发元素聚集。</li>
+<li>再哈希Rehash：发生冲突时，使用第二个，第三个 hash 函数计算地址(比如取第 n 位)，直到无冲突</li>
+<li>链表: 新加的数据更可能是”热数据”，所以将新增加的元素插入链表头部<br>在编程语言层面，<code>GoLang</code> 和<code>C++</code> unordered_map 使用链表结构.<br><code>Java HashMap</code> 实现默认也是链表，不同的是当 bucket 内链表长度超过 8 的时候转换成红黑树（目的是加快查找）<br><code>C#</code>使用的是再哈希方式，一次冲突再换一个，直到找到有空位的地方存储。<br><code>Python</code> dic{}采取开放地址</li>
+</ol>
+<h3 id="装载因子"><a href="#装载因子" class="headerlink" title="装载因子"></a>装载因子</h3><p>a = 元素个数/hash数组大小，a 在 0.6～0.9 之间，一般取 0.75. 即当存取元素的数组接近装载满时，重新生成一个新的更大数组并将旧数据导入。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>操作系统笔记</title>
     <url>/2021/07/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<p>死锁<br>根源在于资源的抢占，并且，多个进程间形成了循环依赖，即得不到被其他进程占用的资源，也不释放自己已经占据的资源。</p>
+    <content><![CDATA[<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><ol>
+<li>计算机系统<ol>
+<li>OS特征  :并发 /共享(互斥访问，共享访问) /虚拟- 空分复用(内存)，时分复用(CPU时间片) / 异步</li>
+<li>CPU状态 : 核心态-保护/用户态-&gt;通过中断/异常访管指令访问核心态</li>
+<li>内核:计时/时间片调度/中断机制/原语-设备驱动控制/数据结构及处理</li>
+<li>体系结构:大内核/微内核</li>
+</ol>
+</li>
+<li>进程管理<ol>
+<li>进程: CPU<strong>分配资源</strong>的单位  vs 线程是CPU<strong>独立调度</strong>的单位，进程由程序段，数据段，PCB(进程控制块)组成，运行状态包括就绪、执行、阻塞。</li>
+<li><strong>进程通信</strong><ol>
+<li>共享存储</li>
+<li>消息: 消息缓冲区</li>
+<li>管道(单双工)</li>
+</ol>
+</li>
+<li>进程同步<ol>
+<li>软件</li>
+<li>硬件<ul>
+<li>中断</li>
+<li>硬件指令: swap/TestAndSet</li>
+</ul>
+</li>
+<li>信号量 wait-signal</li>
+</ol>
+</li>
+<li>作业调度算法: 先来先服务/ 短作业优先/优先级调度/时间片，<strong>多级反馈队列算法</strong>: 多个就绪队列，时间长的自动排到下一优先级队尾</li>
+<li>死锁: 多个进程竞争同一资源产生互相等待，既得不到被其他进程占用的资源，也不释放自己已经占据的资源。产生的4个必要条件及检测解决(略)</li>
+</ol>
+</li>
+<li>内存管理(MMU)<ol>
+<li>解决OS空分复用中内存访问防护与定位:利用映射单元，通过<strong>基址</strong>和<strong>界限</strong>寄存器，保证程序不能引用低于基址和高于界限的的存储空间。</li>
+<li>内存地址转换: 逻辑地址向物理地址转换</li>
+<li>虚拟内存管理:把程序所需存储空间分成若干页或段<ol>
+<li>分页式(一页默认4K)</li>
+<li>分段式</li>
+<li>段页式<br>访问时不在内存中，暂停当前线程，进行缺页中断处理。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>文件管理(略)</li>
+<li>IO外设管理控制 (从低到高，对CPU的干扰逐级降低)<ol>
+<li>程序控制</li>
+<li>中断驱动<ol>
+<li>DMA方式</li>
+<li>通道控制方式</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h2><ol>
+<li>操作系统malloc做了什么操作?<ul>
+<li>申请空间&lt;128K,使用brk移动指针到高地址  </li>
+<li>申请空间&gt;128K,作用mmap在 Memory Mapping Segment 找一块空闲的虚拟内存<br>malloc分配的是虚拟内存，没有分配物理内存。第一次访问已分配的虚拟地址空间时发生缺页中断，OS分配物理内存建立虚拟内存和物理内存之间的映射关系,在系统中可以看到VSZ:申请的虚拟地址空间大小，RSS是实际分配内存的大小。</li>
+</ul>
+</li>
+<li>free后物理内存归还给操作系统了吗？<br>free后内存并不一定还给OS<ul>
+<li>&gt;128K时(依实现此阈值不同) unmap返还给OS</li>
+<li>&lt;128K时，使用sbrk回收，并且只有当堆顶总空间&gt;128k,才会还给OS<br>所以free后内存并不一定还给OS.</li>
+</ul>
+</li>
+</ol>
 ]]></content>
   </entry>
   <entry>
@@ -115,193 +383,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>哈希</title>
-    <url>/2021/07/20/%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<h3 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h3><p><code>index = hash%length</code>  length 一般取素数，以使得求模运算出来的冲突更少（可以提前计算出素数表存起来）<br>将 key 转换为固定长度数组下标，存取&lt;key，value&gt;。  </p>
-<h3 id="解决冲突常见方法"><a href="#解决冲突常见方法" class="headerlink" title="解决冲突常见方法"></a>解决冲突常见方法</h3><p>当一个索引位置已经存取了某个值，后续通过计算又落到该索引位置时，产生存取冲突，解决方法有：</p>
-<ol>
-<li>开放地址: 产生冲突时，使用线性探测，向后移动 n 个位置。该方式缺点是容易引发元素聚集。</li>
-<li>再哈希Rehash：发生冲突时，使用第二个，第三个 hash 函数计算地址(比如取第 n 位)，直到无冲突</li>
-<li>链表: 新加的数据更可能是”热数据”，所以将新增加的元素插入链表头部<br>在编程语言层面，<code>GoLang</code> 和<code>C++</code> unordered_map 使用链表结构.<br><code>Java HashMap</code> 实现默认也是链表，不同的是当 bucket 内链表长度超过 8 的时候转换成红黑树（目的是加快查找）<br><code>C#</code>使用的是再哈希方式，一次冲突再换一个，直到找到有空位的地方存储。<br><code>Python</code> dic{}采取开放地址</li>
-</ol>
-<h3 id="装载因子"><a href="#装载因子" class="headerlink" title="装载因子"></a>装载因子</h3><p>a = 元素个数/hash数组大小，a 在 0.6～0.9 之间，一般取 0.75. 即当存取元素的数组接近装载满时，重新生成一个新的更大数组并将旧数据导入。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>MD5 与 SHA</title>
-    <url>/2021/07/19/MD5%E4%B8%8ESHA/</url>
-    <content><![CDATA[<h2 id="常用的哈希算法"><a href="#常用的哈希算法" class="headerlink" title="常用的哈希算法"></a>常用的哈希算法</h2><p>散列函数又称哈希函数，从任何一种数据中创建小的数字指纹的方法。哈希函数具有雪崩效应，即输入上微小的改变可以使输出产生剧变。</p>
-<ul>
-<li>MD5 信息摘要算法</li>
-<li>SHA 安全哈希算法。 SHA256属于 SHA2 家族， 无论输入多长，都输出 64 个字符，共 32 byte，256bit(0-9，A～F，大小写敏感)。</li>
-<li>SHA 比 MD5 摘要长，安全性更高；运行速度比 MD5 慢。</li>
-</ul>
-<h2 id="对称加密，非对称加密"><a href="#对称加密，非对称加密" class="headerlink" title="对称加密，非对称加密"></a>对称加密，非对称加密</h2><ul>
-<li>其中非对称加密，有公私钥之分，公钥可以公开传播，私钥只有拥有者持有，不可对外暴露。</li>
-<li>通过私钥能还原出使用公钥加密过的内容，私钥也也可以用来签名，使用对应公钥解密。</li>
-</ul>
-<h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><ul>
-<li>证书包含除公钥信息外， 还有一些额外身份信息，如商户号，公司名等。</li>
-<li>公钥本身不包含持有者身份信息，所以需要 CA 证书认证机构，将公钥+拥有者信息+有效期等进行签名，制作成证书。</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/05/12/%E8%8B%B9%E6%9E%9C%E5%B8%90%E5%8F%B7/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>AVFoundation播放器</title>
-    <url>/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</url>
-    <content><![CDATA[<p>AVFoundation 包含了音视频播放，摄像头音视频流采集，媒体编辑等。</p>
-<h2 id="音视频播放主要类"><a href="#音视频播放主要类" class="headerlink" title="音视频播放主要类"></a>音视频播放主要类</h2><ul>
-<li>AVPlayer : 使用 playeritem 创建，KVO 监听播放状态变化</li>
-<li>AVPlayerItem: 播控</li>
-<li>AVPlayerLayer 与 player 绑定，视频渲染到该 layer 上</li>
-<li>AVPlayerViewController 系统默认播放 UI套件</li>
-<li>AVAudioPlayer 播放声音</li>
-</ul>
-<h2 id="摄像头音视频流采集"><a href="#摄像头音视频流采集" class="headerlink" title="摄像头音视频流采集"></a>摄像头音视频流采集</h2><p>使用流程</p>
-<ol>
-<li>创建 session:AVCaptureSession</li>
-<li>创建 设备，AVCaptureDevice<ul>
-<li>使用 第 2 步中胡 DEVICE创建 AVCaptureDeviceInput，并加入 session</li>
-<li>创建AVCaptureOutput</li>
-<li>设置 output 代理，加入 session ，在代理的串行线程队列中分析数据流<br>其他:</li>
-</ul>
-<ol>
-<li>AVCaptureVideoPreviewLayer: 摄像头预览</li>
-<li>AVAudioRecorder: 录制声音，暂停/恢复/停止录音</li>
-</ol>
-</li>
-</ol>
-<h2 id="媒体编辑"><a href="#媒体编辑" class="headerlink" title="媒体编辑"></a>媒体编辑</h2><ul>
-<li>只读AVCompositon 由AVCompositionTrack 构成 (他们分别是 AVAsset 和 AVAssetTrack 子类)</li>
-<li>媒体编辑AVMutableComposition+AVMutableCompositionTrack</li>
-<li>访问视频帧和音频样本等更低层的数据: AVAssetReader/AVAssetWriter</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>HLS简谈</title>
-    <url>/2021/04/19/HLS%E7%AE%80%E8%B0%88/</url>
-    <content><![CDATA[<h2 id="HLS-HTTP-Live-Streaming-特点"><a href="#HLS-HTTP-Live-Streaming-特点" class="headerlink" title="HLS(HTTP Live Streaming)特点"></a>HLS(HTTP Live Streaming)特点</h2><p> HLS是苹果公司提出的基于HTTP的流媒体传输协议<a href="https://developer.apple.com/streaming/">https://developer.apple.com/streaming/</a>，其特点如下</p>
-<ul>
-<li>支持自适应码流，客户端可以根据自身的带宽情况及性能限制,播放不同码流视频.</li>
-<li>支持 HTTPS 加密和用户认证</li>
-<li>不需要特殊设备，可在 apache 等 web 服务器上分发</li>
-</ul>
-<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ol>
-<li>m3u8索引文件: 定义片段文件的位置，时长(EXT-X-TARGETDURATION )，播放顺序等元数据</li>
-<li>ts切片文件，由三层构成<ul>
-<li>es: 音视频数据</li>
-<li>pes: 在es层上加时间戳</li>
-<li>ts: 在pes层上增加数据流识别和传输信息，ts包大小一般为188字节</li>
-</ul>
-</li>
-<li>key加密串(可选)</li>
-</ol>
-<h2 id="面临的挑战"><a href="#面临的挑战" class="headerlink" title="面临的挑战"></a>面临的挑战</h2><ul>
-<li>延迟<ul>
-<li>解决方案：使用更短的 ts 段。</li>
-<li>副作用：更频繁的 HTTP 连接缓冲。</li>
-</ul>
-</li>
-<li>会生成大量的小文件, 对存储IO造成了比较大的压力。<ul>
-<li>解决方案:内存切片</li>
-</ul>
-</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>记一次排查bug所引发的对冥等设计的思考</title>
-    <url>/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</url>
-    <content><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性，这意味着cell没有实现内存复用，在数据量大的时候会产生内存暴涨问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过调试，发现tableview在对cell设置数据（setModel）后，未重置折叠展开的状态位S1。 setModel没有直接调用 -layoutsubview，但会通过setNeedsLayout被系统模板方法在某个合适时机间接调用到layoutsubview，而该方法会通过S1呈现展开或收起的状态。</p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>setModel作为暴露给外部使用的接口，要考虑幂等设计：即第一次调用跟第N次调用产生的效果是一样的。<br>要处理类似问题，开发人员除了清楚了解自己写的逻辑，也要清晰理解系统调用和运行机制。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>IOS数据加载层架构设计</title>
-    <url>/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<p>工作中做过网络数据加载的设计工作.设计时考虑的一些关键点包含:</p>
-<ul>
-<li><p>网络请求的包装(AF)</p>
-</li>
-<li><p>数据解析(DataParser),需要对空值及错误处理</p>
-</li>
-<li><p>重试队列,对网络请求超时处理</p>
-</li>
-<li><p>对请求进行统一的加工</p>
-<ul>
-<li>根据域名,添加不同的公共参数,比如设备类型,OS版本,地理位置信息等. 调用方只关注业务所需参数.</li>
-<li>根据请求参数进行请求签名</li>
-</ul>
-</li>
-<li><p>日志</p>
-<ul>
-<li>了解使用方的调用情况,帮助定位错误,统计接口性能(比如排查响应时间过长的异常请求)等</li>
-<li>考虑到出问题的更多是缓存层之前的部分(比如参数错误,流程错误等), 日志过多干扰问题定位,所以未对缓存层使用日志.</li>
-</ul>
-</li>
-<li><p>缓存的读取及写入</p>
-<ul>
-<li>内存+硬盘 缓存方案可由调用方指定</li>
-<li>内存使用NSCache或LRU淘汰算法. 最终使用的NSCache,原因:<ul>
-<li>代码简单</li>
-<li>自带线程安全</li>
-<li>性能不是最好,但显然以单个普通APP的并发量查询操作,这里不会成为瓶颈点</li>
-<li>内存警告时能自动清理内存数据</li>
-</ul>
-</li>
-<li>持久化写入<ul>
-<li>通过对url md5生成近乎唯一的key,作为cache key和文件名</li>
-<li>写入temp目录,由系统自动清理</li>
-<li>先对业务方返回数据,再进行写入,并使用队列 + 子线程,避免占用主线程</li>
-</ul>
-</li>
-</ul>
-<p>在设计缓存策略时, 没有使用URLCachePolicy的原因是,我们通过后端返回的数据字段来指定数据有效期,并且需要写入文件持久化存储. 另外需要提供给业务方更加定制化的数据回调策略.<br><strong>业务使用方只需关注本业务API特定的必要参数, 不用关注上述实现细节,调用非常简单</strong><br>伪代码:</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">dataloader_a *loader = <span class="keyword">new</span> dataloader_a;</span><br><span class="line">loader.load_option = <span class="keyword">default</span>/net_only/cache_first...; <span class="comment">//设置数据加载策略</span></span><br><span class="line">loader.param1=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.param2=<span class="string">&quot;&quot;</span>;</span><br><span class="line">loader.start_with_succ&#123;...&#125; fail&#123;...&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>附架构图设计如下:</p>
-<p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>iTerm2快捷键</title>
-    <url>/2021/02/23/iterm2-cursor/</url>
-    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
-<ol>
-<li><p>删除</p>
-<blockquote>
-<p>ctrl+u 光标前到行首字符<br> ctrl+k 光标到行尾字符<br> ctrl+w 光标前单词</p>
-</blockquote>
-</li>
-<li><p>光标移动</p>
-<blockquote>
-<p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>截图软件iShot使用技巧</title>
-    <url>/2021/02/22/iShot%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<p>用iShot作截图及标注工具非常好用，用了一次就爱了，mark一下</p>
-<p>基本操作:</p>
-<pre><code>1. option+ A 选取截图区域
-2. 1-9功能,支持标注标 模糊等功能, 在标注内 滚动鼠标滑轮, 调整透明度; 在标注外,调整粗细
-3. 空格(保存文件 到默认路径) or 回车到剪贴板
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>视频编解码基础概念</title>
     <url>/2021/02/20/%E8%A7%86%E9%A2%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<ol>
@@ -357,29 +438,11 @@
 ]]></content>
   </entry>
   <entry>
-    <title>NSObject alloc实现</title>
-    <url>/2021/01/25/NSObject-Alloc%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>有两种alloc实现</p>
-<ol>
-<li><p>GNUstep(Cocoa互换框架 )</p>
-<p> NSZone是为了防止内存碎片化而引入的结构,通过使用对象的目的,对象大小分配内存,提高效率.苹果官方文档说明, 现在的运行时系统内存管理已极具效率,使用NSZone反而效率低下源码复杂.</p>
-<p> alloc简化版,引用计数信息写入对象内存头部</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>&#123;</span></span><br><span class="line">    NSUinteger retained;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+(id)alloc&#123;</span><br><span class="line">    <span class="keyword">int</span> size = <span class="keyword">sizeof</span>(stuct obj_layout)+对象大小</span><br><span class="line">    struct obj_layout *p = (struct obj_layout*) <span class="built_in">calloc</span>(<span class="number">1</span>,size);</span><br><span class="line">    <span class="keyword">return</span>(id)(p+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)release&#123;</span><br><span class="line">    <span class="keyword">if</span>(decrementeExtraRefCountWasZero(self))</span><br><span class="line">    [self dealloc];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)dealloc&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">obj_layout</span>*<span class="title">p</span> =</span> &amp; ((struct obj_layout *)self)[<span class="number">-1</span>];</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p> Q:当retained变量超出最大值时会发生什么?<br> A:retain方法会抛出异常</p>
-</li>
-<li><p>Apple实现</p>
- <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">CFSpinLock_t lock;</span><br><span class="line">CFBasicHashRef table;</span><br><span class="line"><span class="keyword">uint8_t</span> padding[<span class="number">64</span> - <span class="keyword">sizeof</span>(CFBasicHashRef) - <span class="keyword">sizeof</span>(CFSpinLock_t)];</span><br><span class="line"></span><br><span class="line">&#125; __NSRetainCounters[NUM_EXTERN_TABLES];</span><br><span class="line"></span><br><span class="line">CF_EXPORT <span class="keyword">uintptr_t</span> __CFDoExternRefOperation(<span class="keyword">uintptr_t</span> op, id obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nil == obj) HALT;</span><br><span class="line">    <span class="keyword">uintptr_t</span> idx = EXTERN_TABLE_IDX(obj);</span><br><span class="line">    <span class="keyword">uintptr_t</span> disguised = DISGUISE(obj);</span><br><span class="line">    CFSpinLock_t *lock = &amp;__NSRetainCounters[idx].lock;</span><br><span class="line">    CFBasicHashRef table = __NSRetainCounters[idx].table;</span><br><span class="line">    <span class="keyword">uintptr_t</span> count;</span><br><span class="line">    <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">300</span>:   <span class="comment">// increment</span></span><br><span class="line">        <span class="keyword">case</span> <span class="number">350</span>:   <span class="comment">// increment, no event</span></span><br><span class="line">            __CFSpinLock(lock);</span><br><span class="line">            CFBasicHashAddValue(table, disguised, disguised);</span><br><span class="line">            __CFSpinUnlock(lock);</span><br><span class="line">            <span class="keyword">if</span> (__CFOASafe &amp;&amp; op != <span class="number">350</span>) __CFRecordAllocationEvent(__kCFObjectRetainedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">uintptr_t</span>)obj;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">400</span>:   <span class="comment">// decrement</span></span><br><span class="line">        <span class="keyword">if</span> (__CFOASafe) __CFRecordAllocationEvent(__kCFObjectReleasedEvent, obj, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">case</span> <span class="number">450</span>:   <span class="comment">// decrement, no event</span></span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashRemoveValue(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span> == count;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">        __CFSpinLock(lock);</span><br><span class="line">        count = (<span class="keyword">uintptr_t</span>)CFBasicHashGetCountOfKey(table, disguised);</span><br><span class="line">        __CFSpinUnlock(lock);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>  __CFDoExternRefOperation 按照retainCount/retain/release 调用不同的函数.<br>  alloc通过多个散列表来管理引用计数,对每个引用计数表的访问都需要配合spinlock.<br> <code>CFBasicHashRef table = __NSRetainCounters[idx].table;</code> 从该行代码看,APPLE是通过多个散列表来管理引用计数,每个NSRetainCounters结构体里有spinlock和table,执行引用计数操作时是线程安全的.</p>
-</li>
-<li><p>两种实现对比</p>
-<p> GNUstep实现简单高效,代码少, 内存块需考虑头部(指针地址偏移);<br> 苹果的实现较为复杂通过引用计数表查到内存块.<br> 苹果实现好处是:方便调试,即使对象内存块损坏, 只要引用计数表没有被破话, 就能够确认内存块位置; <strong><em>在检测内存泄漏时,有助于检测各对象的持有者是否存在.</em></strong></p>
-</li>
-</ol>
+    <title>记一次排查bug所引发的对冥等设计的思考</title>
+    <url>/2021/04/19/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%8E%92%E6%9F%A5bug%E6%89%80%E5%BC%95%E5%8F%91%E7%9A%84%E5%AF%B9%E5%86%A5%E7%AD%89%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    <content><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>项目开发过程中，有位同事构建了一个支持折叠展开子项的cell（课程单元下有章节）。当使用tableview的代理方法创建cell时，只有每个cell设置不同ReuseIdentifier时，才能确保折叠与展开两种交互状态的正确性，这意味着cell没有实现内存复用，在数据量大的时候会产生内存暴涨问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过调试，发现tableview在对cell设置数据（setModel）后，未重置折叠展开的状态位S1。 setModel没有直接调用 -layoutsubview，但会通过setNeedsLayout被系统模板方法在某个合适时机间接调用到layoutsubview，而该方法会通过S1呈现展开或收起的状态。</p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>setModel作为暴露给外部使用的接口，要考虑幂等设计：即第一次调用跟第N次调用产生的效果是一样的。<br>要处理类似问题，开发人员除了清楚了解自己写的逻辑，也要清晰理解系统调用和运行机制。</p>
 ]]></content>
-      <tags>
-        <tag>IOS</tag>
-      </tags>
   </entry>
 </search>
