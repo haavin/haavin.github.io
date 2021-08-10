@@ -260,6 +260,29 @@
   </entry>
   
   <entry>
+    <title>终端使用</title>
+    <link href="http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/</id>
+    <published>2021-02-23T10:52:12.000Z</published>
+    <updated>2021-08-10T09:27:33.143Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;修改 iterm2-&amp;gt;Preferences-&amp;gt;Profile.Default.Preset为&lt;code&gt;Natural Text Editing&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;删除&lt;br&gt;ctrl+u 光标前到行首字符&lt;br&gt;ctrl+k</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>iTerm2快捷键</title>
     <link href="http://example.com/2021/02/23/iterm2-cursor/"/>
     <id>http://example.com/2021/02/23/iterm2-cursor/</id>
@@ -276,29 +299,6 @@
 &lt;li&gt;&lt;p&gt;删除&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ctrl+u</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>终端使用</title>
-    <link href="http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/</id>
-    <published>2021-02-23T10:52:12.000Z</published>
-    <updated>2021-08-10T09:27:33.143Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;修改 iterm2-&amp;gt;Preferences-&amp;gt;Profile.Default.Preset为&lt;code&gt;Natural Text Editing&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;删除&lt;br&gt;ctrl+u 光标前到行首字符&lt;br&gt;ctrl+k</summary>
         
       
     
