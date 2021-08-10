@@ -169,7 +169,7 @@
     <link href="http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     <id>http://example.com/2021/04/19/AVFoundation%E6%92%AD%E6%94%BE%E5%99%A8/</id>
     <published>2021-04-19T12:56:23.000Z</published>
-    <updated>2021-07-20T11:01:45.670Z</updated>
+    <updated>2021-08-10T09:25:36.919Z</updated>
     
     
       
@@ -183,6 +183,8 @@
     
     
     
+    
+    <category term="音视频" scheme="http://example.com/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/"/>
     
   </entry>
   
@@ -233,7 +235,7 @@
     <link href="http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     <id>http://example.com/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</id>
     <published>2021-04-06T10:45:09.000Z</published>
-    <updated>2021-07-20T10:57:34.952Z</updated>
+    <updated>2021-08-10T09:25:51.272Z</updated>
     
     
       
@@ -252,6 +254,8 @@
     
     
     
+    
+    <category term="ios" scheme="http://example.com/tags/ios/"/>
     
   </entry>
   
@@ -272,6 +276,29 @@
 &lt;li&gt;&lt;p&gt;删除&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ctrl+u</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>终端使用</title>
+    <link href="http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/</id>
+    <published>2021-02-23T10:52:12.000Z</published>
+    <updated>2021-08-10T09:27:33.143Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;修改 iterm2-&amp;gt;Preferences-&amp;gt;Profile.Default.Preset为&lt;code&gt;Natural Text Editing&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;删除&lt;br&gt;ctrl+u 光标前到行首字符&lt;br&gt;ctrl+k</summary>
         
       
     

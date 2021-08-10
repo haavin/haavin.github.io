@@ -252,6 +252,9 @@
 <li>访问视频帧和音频样本等更低层的数据: AVAssetReader/AVAssetWriter</li>
 </ul>
 ]]></content>
+      <tags>
+        <tag>音视频</tag>
+      </tags>
   </entry>
   <entry>
     <title>HLS简谈</title>
@@ -341,6 +344,9 @@
 <p>附架构图设计如下:</p>
 <p><img src="/2021/04/06/IOS%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/1.png" alt="架构图"></p>
 ]]></content>
+      <tags>
+        <tag>ios</tag>
+      </tags>
   </entry>
   <entry>
     <title>iTerm2快捷键</title>
@@ -356,6 +362,18 @@
 <blockquote>
 <p>ctrl+a  行首<br> ctrl+e  行尾<br> option+ &lt;- word移动<br> option+ -&gt; word移动</p>
 </blockquote>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>终端使用</title>
+    <url>/2021/02/23/%20iTerm2%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>修改 iterm2-&gt;Preferences-&gt;Profile.Default.Preset为<code>Natural Text Editing</code></p>
+<ol>
+<li><p>删除<br>ctrl+u 光标前到行首字符<br>ctrl+k 光标到行尾字符<br>ctrl+w 光标前单词</p>
+</li>
+<li><p>光标移动<br>ctrl+a  行首<br>ctrl+e  行尾<br>option+ &lt;- word移动<br>option+ -&gt; word移动</p>
 </li>
 </ol>
 ]]></content>
