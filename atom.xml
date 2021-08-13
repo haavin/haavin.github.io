@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-10T09:00:44.769Z</updated>
+  <updated>2021-08-13T09:15:05.160Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,25 +17,46 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>常见IO模型-IO多路复用</title>
+    <link href="http://example.com/2021/08/12/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/"/>
+    <id>http://example.com/2021/08/12/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</id>
+    <published>2021-08-12T06:52:00.000Z</published>
+    <updated>2021-08-13T09:15:05.160Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;常见IO模型&quot;&gt;&lt;a href=&quot;#常见IO模型&quot; class=&quot;headerlink&quot; title=&quot;常见IO模型:&quot;&gt;&lt;/a&gt;常见IO模型:&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;同步阻塞IO（Blocking</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>HTTPS笔记</title>
     <link href="http://example.com/2021/08/10/HTTPS/"/>
     <id>http://example.com/2021/08/10/HTTPS/</id>
     <published>2021-08-10T08:15:00.000Z</published>
-    <updated>2021-08-10T09:00:44.769Z</updated>
+    <updated>2021-08-10T11:47:12.261Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;GoodNote手写&lt;/p&gt;
-&lt;p&gt;KeyPoint:&lt;/p&gt;
+    <summary type="html">&lt;p&gt;KeyPoint:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;证书是什么，与数字签名什么关系?&lt;/li&gt;
 &lt;li&gt;怎么验证证书未篡改，验证证书合法需要连网吗?&lt;/li&gt;
 &lt;li&gt;什么是中间人攻击?&lt;/li&gt;
 &lt;li&gt;为什么要引入CA签名证书?&lt;/li&gt;
-</summary>
+&lt;li&gt;TLS与SSL是什么关系?&lt;</summary>
         
       
     
